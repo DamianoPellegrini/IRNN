@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace IRNN.WPF
 {
     /// <summary>
-    /// Logica di interazione per MainWindow.xaml
+    /// Logica di interazione per ImageCreator.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ImageCreator : Window
     {
-        public MainWindow()
+        public ImageCreator()
         {
             InitializeComponent();
         }
