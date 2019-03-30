@@ -1,0 +1,5 @@
+Z:\Informatica\2019\Progetto Rete Neurale\IRNN\IRNN.Window\obj\Debug\IRNN.Window.csprojAssemblyReference.cache
+Z:\Informatica\2019\Progetto Rete Neurale\IRNN\IRNN.Window\obj\Debug\MainWindow.g.cs
+Z:\Informatica\2019\Progetto Rete Neurale\IRNN\IRNN.Window\obj\Debug\App.g.cs
+Z:\Informatica\2019\Progetto Rete Neurale\IRNN\IRNN.Window\obj\Debug\IRNN_MarkupCompile.cache
+Z:\Informatica\2019\Progetto Rete Neurale\IRNN\IRNN.Window\obj\Debug\IRNN_MarkupCompile.lref
