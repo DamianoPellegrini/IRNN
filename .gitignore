@@ -1,3 +1,5 @@
 # Folder
 .vs/
 bin/
+IRNN.WPF/obj/
+IRNN.Lib/obj/
