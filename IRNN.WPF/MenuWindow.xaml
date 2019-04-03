@@ -6,20 +6,9 @@
         xmlns:local="clr-namespace:IRNN.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Menu>
-            <MenuItem Header="_File">
-                <MenuItem Header="_Apri immagine"/>
-                <MenuItem Header="_Salva immagini"/>
-                <Separator/>
-                <MenuItem Header="_Esci"/>
-            </MenuItem>
-            <MenuItem Header="_Modifica"/>
-            <MenuItem Header="_?"/>
-        </Menu>
-    </Grid>
+    <StackPanel>
+        <TextBlock Text="Test text!" FontSize="40" FontFamily="{StaticResource RobotoRegular}"/>
+        <TextBlock Text="Test text!" FontSize="40" FontFamily="{StaticResource RobotoThin}"/>
+        <Button Content="Test" Style="{StaticResource ButtonBlackStyle}"/>
+    </StackPanel>
 </Window>
