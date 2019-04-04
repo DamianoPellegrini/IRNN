@@ -14,3 +14,18 @@ None for now.
 
 ## Example usage
 N/A
+
+## Credits
+#### Alessandro Sciarrillo
+List of features:
+- Artificial Neural Network
+#### Antonio Di Meglio
+List of features:
+- Artificial Neural Network
+#### Damiano Pellegrini
+List of features:
+- Menu window
+- Image creation window
+- User Interface in general
+#### Niccolo Mussoni
+#### Simone Lugaresi
