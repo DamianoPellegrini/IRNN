@@ -1,4 +1,4 @@
 # IRNN
 Image Recognition Neural Network
 ## NN engine branch
-Developed by Alessandro Sciarrillo & Antonio Di Meglio.
+Developed by Alessandro Sciarrillo and Antonio Di Meglio.
