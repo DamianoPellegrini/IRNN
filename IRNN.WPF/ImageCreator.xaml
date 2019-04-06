@@ -7,6 +7,19 @@
         mc:Ignorable="d"
         Title="ImageCreator" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="_File">
+                <MenuItem Header="_Apri immagine"/>
+                <MenuItem Header="_Salva immagini"/>
+                <Separator/>
+                <MenuItem Header="_Esci"/>
+            </MenuItem>
+            <MenuItem Header="_Modifica"/>
+            <MenuItem Header="_?"/>
+        </Menu>
     </Grid>
 </Window>

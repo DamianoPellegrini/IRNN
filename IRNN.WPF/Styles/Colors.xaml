@@ -14,16 +14,6 @@
     <Color x:Key="ForegroundBlack">#ffffff</Color>
     <SolidColorBrush x:Key="ForegroundBlackBrush" Color="{StaticResource ForegroundBlack}"/>
 
-    <Style TargetType="{x:Type Control}" x:Key="BlackStyle">
-        <Setter Property="Background" Value="{StaticResource BackgroundBlackBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundBlackBrush}"/>
-    </Style>
-
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BlackStyle}"/>
-    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BlackStyle}"/>
-    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BlackStyle}"/>
-    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BlackStyle}"/>
-    
     <Color x:Key="BackgroundWhite">#2a2a2a</Color>
     <SolidColorBrush x:Key="BackgroundWhiteBrush" Color="{StaticResource BackgroundWhite}"/>
 
@@ -36,14 +26,4 @@
     <Color x:Key="ForegroundWhite">#ffffff</Color>
     <SolidColorBrush x:Key="ForegroundWhiteBrush" Color="{StaticResource ForegroundWhite}"/>
 
-    <!--<Style TargetType="{x:Type Control}" x:Key="WhiteStyle">
-        <Setter Property="Background" Value="{StaticResource BackgroundWhiteBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundWhiteBrush}"/>
-    </Style>
-
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WhiteStyle}"/>
-    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource WhiteStyle}"/>
-    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource WhiteStyle}"/>
-    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource WhiteStyle}"/>-->
-    
 </ResourceDictionary>

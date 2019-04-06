@@ -21,5 +21,6 @@
             <MenuItem Header="_Modifica"/>
             <MenuItem Header="_?"/>
         </Menu>
+        
     </Grid>
 </Window>

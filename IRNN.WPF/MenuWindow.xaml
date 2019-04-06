@@ -3,12 +3,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dx="http://sparrowtoolkit.codeplex.com/wpf"
         xmlns:local="clr-namespace:IRNN.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-        <TextBlock Text="Test text!" FontSize="40" FontFamily="{StaticResource RobotoRegular}"/>
-        <TextBlock Text="Test text!" FontSize="40" FontFamily="{StaticResource RobotoThin}"/>
-        <Button Content="Test" Style="{StaticResource ButtonBlackStyle}"/>
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="lst_recentImages">
+            
+        </ListView>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Width" Value="200"/>
+                    <Setter Property="Height" Value="50"/>
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="Margin" Value="2"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button x:Name="btn_editor" Content="Image editor"/>
+            <Button x:Name="btn_network" Content="Neural network"/>
+        </StackPanel>
+    </Grid>
 </Window>
