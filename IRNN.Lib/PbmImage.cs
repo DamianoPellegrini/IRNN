@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,17 +14,20 @@ namespace IRNN
     {
         //TODO Magari aggiungere un tipo tipo il P1
 
-        
+
         private byte[,] data;
 
         /// <summary>
         /// The image matrix.
         /// </summary>
-        public byte[,] Image {
-            get {
+        public byte[,] Image
+        {
+            get
+            {
                 return data;
             }
-            private set {
+            private set
+            {
                 data = value;
             }
         }
@@ -96,7 +100,27 @@ namespace IRNN
         /// <param name="filePath">Path to the image.</param>
         public PBMImage(string filePath)
         {
-            //TODO load image to matrix
+            string[] file = File.ReadAllLines(filePath);
+            int comment = 0;
+            for (int i = 0; i < file.Length; i++)
+            {
+                //if (file[i].StartsWith("#"))
+                //    comment++;
+
+                string[] line = file[i].Split(' ');
+                if (i == (0 + comment)) continue;//tipo
+                else if (i == 1 + comment)
+                    data = new byte[int.Parse(line[1]), int.Parse(line[0])];
+                else
+                {
+                    for (int j = 0; j < Width; j++)
+                    {
+                        //FIX loading
+                        data[i - 2 - comment, j] = byte.Parse(line[j]);
+                    }
+                }
+
+            }
         }
     }
 }
