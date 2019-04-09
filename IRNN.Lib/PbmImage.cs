@@ -39,7 +39,7 @@ namespace IRNN
         {
             get
             {
-                return data.GetLength(0);
+                return data.GetLength(1);
             }
         }
 
@@ -50,7 +50,7 @@ namespace IRNN
         {
             get
             {
-                return data.GetLength(1);
+                return data.GetLength(0);
             }
         }
 
@@ -104,18 +104,20 @@ namespace IRNN
             int comment = 0;
             for (int i = 0; i < file.Length; i++)
             {
-                //if (file[i].StartsWith("#"))
-                //    comment++;
+                //Conta i commenti iniziali per poterli gestire in lettura ignorandoli
+                if (file[i].StartsWith("#")) {
+                    comment++;
+                    continue; //end this loop cycle
+                }
 
                 string[] line = file[i].Split(' ');
-                if (i == (0 + comment)) continue;//tipo
+                if (i == (0 + comment)) continue;//tipo del formato pbm
                 else if (i == 1 + comment)
-                    data = new byte[int.Parse(line[1]), int.Parse(line[0])];
+                    data = new byte[int.Parse(line[1]), int.Parse(line[0])]; //ottiene le dimensioni dell matrice
                 else
                 {
                     for (int j = 0; j < Width; j++)
                     {
-                        //FIX loading
                         data[i - 2 - comment, j] = byte.Parse(line[j]);
                     }
                 }
