@@ -28,4 +28,8 @@ List of features:
 - Image creation window
 - User Interface in general
 #### Niccolo Mussoni
+List of features:
+- Statistics window, and profiling
 #### Simone Lugaresi
+List of features:
+- Statistics window, and profiling
