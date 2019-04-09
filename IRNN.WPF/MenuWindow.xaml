@@ -12,7 +12,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="lst_recentImages">
+        <ListView x:Name="lst_recentImages" Margin="10">
             
         </ListView>
         <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -24,7 +24,7 @@
                     <Setter Property="Margin" Value="2"/>
                 </Style>
             </StackPanel.Resources>
-            <Button x:Name="btn_editor" Content="Image editor"/>
+            <Button x:Name="btn_editor" Content="Image editor" IsEnabled="False"/>
             <Button x:Name="btn_network" Content="Neural network"/>
         </StackPanel>
     </Grid>

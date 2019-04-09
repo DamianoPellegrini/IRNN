@@ -13,5 +13,8 @@ namespace IRNN.WPF
     /// </summary>
     public partial class App : Application
     {
+        public NetworkWindow netWnd;
+        public StatsWindow statsWnd;
+        public ImageCreator imgWnd;
     }
 }

@@ -23,6 +23,14 @@ namespace IRNN.WPF
         public MenuWindow()
         {
             InitializeComponent();
+
+            /*====================TEST CODE TO REMOVE=======================*/
+            StatsWindow wndtest = new StatsWindow();
+            //wndtest.Show();
+            //foreach (Window w in Application.Current.Windows)
+            //    if(!(w is StatsWindow))
+            //    w.Show();
+            /*====================END TEST CODE=============================*/
         }
     }
 }
