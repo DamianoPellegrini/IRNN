@@ -19,9 +19,39 @@ namespace IRNN.WPF
     /// </summary>
     public partial class StatsWindow : Window
     {
+        private App _main;
+        private NeuralNetwork _network;
         public StatsWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            _main = Application.Current as App;
+            _network = _main.Network;
+            caricaLista(lst_layers,-_network.);
+        }
+
+        private void caricaLista<T>(ListView listView, List<T> list)
+        {
+            listView.ItemsSource = list;
+            listView.Items.Refresh();
+        }
+
+        private void lst_neurons_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            //TODO gestire la stampa del neurone con il toString
+        }
+
+        private void lst_layers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lst_layers.SelectedIndex == -1) return;
+            if (_network.NeuralLayers[lst_layers.SelectedIndex] == null) return;
+
+            var layer = _network.NeuralLayers[lst_layers.SelectedIndex];
+            caricaLista(lst_neurons, layer.Neurons);
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:spr="http://sparrowtoolkit.codeplex.com/wpf"
         xmlns:local="clr-namespace:IRNN.WPF"
         mc:Ignorable="d"
-        Title="StatsWindow" Height="450" Width="800">
+        Title="StatsWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -16,8 +16,11 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <ListView Grid.RowSpan="2" Margin="5">
+        <ListView x:Name="lst_neurons" Margin="5" SelectionChanged="lst_neurons_SelectionChanged">
             
+        </ListView>
+        <ListView x:Name="lst_layers" Grid.Row="1" Margin="5" SelectionChanged="lst_layers_SelectionChanged">
+
         </ListView>
         <spr:SparrowChart Grid.Column="1" Margin="5">
             <spr:SparrowChart.YAxis>
