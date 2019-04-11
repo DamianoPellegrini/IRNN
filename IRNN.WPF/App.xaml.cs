@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using IRNN;
 
 namespace IRNN.WPF
 {
@@ -16,5 +17,13 @@ namespace IRNN.WPF
         public NetworkWindow netWnd;
         public StatsWindow statsWnd;
         public ImageCreator imgWnd;
+        private NeuralNetwork _network;
+
+        public NeuralNetwork Network
+        {
+            get { return _network; }
+            set { _network = value; }
+        }
+
     }
 }
