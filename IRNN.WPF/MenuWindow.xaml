@@ -6,7 +6,7 @@
         xmlns:dx="http://sparrowtoolkit.codeplex.com/wpf"
         xmlns:local="clr-namespace:IRNN.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Closed="Window_Closed" Initialized="Window_Initialized" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -24,8 +24,9 @@
                     <Setter Property="Margin" Value="2"/>
                 </Style>
             </StackPanel.Resources>
-            <Button x:Name="btn_editor" Content="Image editor" IsEnabled="False"/>
-            <Button x:Name="btn_network" Content="Neural network"/>
+            <Button x:Name="btn_editor" Content="Image editor" Click="openWindow"/>
+            <Button x:Name="btn_network" Content="Neural network" Click="openWindow"/>
+            <Button x:Name="btn_stats" Content="Statistics REMOVE THIS" Click="openWindow"/>
         </StackPanel>
     </Grid>
 </Window>

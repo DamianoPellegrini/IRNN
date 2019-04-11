@@ -20,17 +20,32 @@ namespace IRNN.WPF
     /// </summary>
     public partial class MenuWindow : Window
     {
+        private App _main;
         public MenuWindow()
         {
             InitializeComponent();
+        }
 
-            /*====================TEST CODE TO REMOVE=======================*/
-            StatsWindow wndtest = new StatsWindow();
-            //wndtest.Show();
-            //foreach (Window w in Application.Current.Windows)
-            //    if(!(w is StatsWindow))
-            //    w.Show();
-            /*====================END TEST CODE=============================*/
+        private void Window_Initialized(object sender, EventArgs e) {
+            _main = Application.Current as App;
+            _main.MenuWindow = this;
+        }
+
+        private void Window_Closed(object sender, EventArgs e) {
+            _main.HasClosed = true;
+            _main.Shutdown();
+        }
+
+        private void openWindow(object sender, RoutedEventArgs e) {
+            Button btn = sender as Button;
+
+            string window = btn.Name.Substring(4);
+            this.Hide();
+            if (window == "stats") {
+                _main.StatisticsWindow.Show();
+                return;
+            }
+            (window == "network" ? _main.NetworkWindow as Window : _main.ImageCreatorWindow as Window).Show();
         }
     }
 }

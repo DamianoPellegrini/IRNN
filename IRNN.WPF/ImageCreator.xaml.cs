@@ -19,9 +19,22 @@ namespace IRNN.WPF
     /// </summary>
     public partial class ImageCreator : Window
     {
+        private App _main;
         public ImageCreator()
         {
             InitializeComponent();
+        }
+
+        private void Window_Initialized(object sender, EventArgs e) {
+            _main = Application.Current as App;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            if (_main.HasClosed)
+                return;
+            e.Cancel = true;
+            this.Hide();
+            _main.MenuWindow.Show();
         }
     }
 }

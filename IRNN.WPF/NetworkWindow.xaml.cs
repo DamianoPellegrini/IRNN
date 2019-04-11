@@ -19,9 +19,24 @@ namespace IRNN.WPF
     /// </summary>
     public partial class NetworkWindow : Window
     {
+        private App _main;
+        private NeuralNetwork _network;
         public NetworkWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Initialized(object sender, EventArgs e) {
+            _main = Application.Current as App;
+            _network = _main.Network;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            if (_main.HasClosed)
+                return;
+            e.Cancel = true;
+            this.Hide();
+            _main.MenuWindow.Show();
         }
     }
 }

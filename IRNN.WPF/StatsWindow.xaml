@@ -6,7 +6,7 @@
         xmlns:spr="http://sparrowtoolkit.codeplex.com/wpf"
         xmlns:local="clr-namespace:IRNN.WPF"
         mc:Ignorable="d"
-        Title="StatsWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="StatsWindow" Height="450" Width="800" Closing="Window_Closing" Initialized="Window_Initialized" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>

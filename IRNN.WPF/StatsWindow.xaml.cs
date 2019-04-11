@@ -26,11 +26,22 @@ namespace IRNN.WPF
             InitializeComponent();
         }
 
+        private void Window_Initialized(object sender, EventArgs e) {
+            _main = Application.Current as App;
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _main = Application.Current as App;
             _network = _main.Network;
-            caricaLista(lst_layers,-_network.);
+            caricaLista(lst_layers, _network.NeuralLayers);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            if (_main.HasClosed)
+                return;
+            e.Cancel = true;
+            this.Hide();
+            _main.MenuWindow.Show();
         }
 
         private void caricaLista<T>(ListView listView, List<T> list)
@@ -41,7 +52,14 @@ namespace IRNN.WPF
 
         private void lst_neurons_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            if (lst_neurons.SelectedIndex == -1) return;
+            if (lst_layers.SelectedIndex == -1)
+                return;
+            if (_network.NeuralLayers[lst_layers.SelectedIndex] == null) return;
+            if (_network.NeuralLayers[lst_layers.SelectedIndex].Neurons[lst_neurons.SelectedIndex] == null)
+                return;
+
+            var neuron = _network.NeuralLayers[lst_layers.SelectedIndex].Neurons[lst_neurons.SelectedIndex];
             //TODO gestire la stampa del neurone con il toString
         }
 
