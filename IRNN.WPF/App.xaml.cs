@@ -13,8 +13,35 @@ namespace IRNN.WPF
     /// </summary>
     public partial class App : Application
     {
-        public NetworkWindow netWnd;
-        public StatsWindow statsWnd;
-        public ImageCreator imgWnd;
+        private NetworkWindow _netWnd;
+        private StatsWindow _statsWnd;
+        private ImageCreator _imgWnd;
+
+        public NetworkWindow NetworkWindow
+        {
+            get { return _netWnd; }
+            private set { _netWnd = value; }
+        }
+
+
+        public StatsWindow StatisticsWindow
+        {
+            get { return _statsWnd; }
+            private set { _statsWnd = value; }
+        }
+
+
+        public ImageCreator ImageCreatorWindow
+        {
+            get { return _imgWnd; }
+            set { _imgWnd = value; }
+        }
+        public App() : base()
+        {
+            _netWnd = new NetworkWindow();
+            _statsWnd = new StatsWindow();
+            _imgWnd = new ImageCreator();
+        }
+
     }
 }
