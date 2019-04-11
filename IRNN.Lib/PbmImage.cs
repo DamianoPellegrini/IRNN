@@ -82,7 +82,17 @@ namespace IRNN
         /// <returns>The linear list.</returns>
         private List<byte> ConvertMatToList()
         {
-            throw new NotImplementedException();
+            List<byte> list = new List<byte>();
+
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    list.Add(data[i, j]);
+                }
+            }
+
+            return list;
         }
 
         /// <summary>
@@ -91,7 +101,19 @@ namespace IRNN
         /// <returns>The linear array.</returns>
         private byte[] ConvertMatToArray()
         {
-            throw new NotImplementedException();
+            byte[] arr = new byte[Width * Height];
+            int cont = 0;
+
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    arr[cont] = data[i, j];
+                    cont++;
+                }
+            }
+
+            return arr;
         }
 
         /// <summary>

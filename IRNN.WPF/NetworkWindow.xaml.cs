@@ -19,6 +19,7 @@ namespace IRNN.WPF
     /// </summary>
     public partial class NetworkWindow : Window
     {
+
         public NetworkWindow()
         {
             InitializeComponent();
