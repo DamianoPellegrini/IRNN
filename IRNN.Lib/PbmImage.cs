@@ -80,7 +80,7 @@ namespace IRNN
         /// Convert the matrix to a linear list.
         /// </summary>
         /// <returns>The linear list.</returns>
-        private List<byte> ConvertMatToList()
+        public List<byte> ConvertMatToList()
         {
             List<byte> list = new List<byte>();
 
@@ -99,7 +99,7 @@ namespace IRNN
         /// Convert the matrix to a linear array.
         /// </summary>
         /// <returns>The linear array.</returns>
-        private byte[] ConvertMatToArray()
+        public byte[] ConvertMatToArray()
         {
             byte[] arr = new byte[Width * Height];
             int cont = 0;

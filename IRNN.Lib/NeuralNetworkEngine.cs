@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeuralNetworkCSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,10 +17,33 @@ namespace IRNN
     class NeuralNetworkEngine
     {
         PBMImage img;
+        SimpleNeuralNetwork simpleNeuralNetwork; 
+        public enum ApplicationStatus { Help, Recognition, Training};
 
-        public NeuralNetworkEngine(PBMImage img)
+        public NeuralNetworkEngine(PBMImage img, ApplicationStatus status)
         {
             this.img = img;
+            simpleNeuralNetwork = new SimpleNeuralNetwork();
+            StatusHandler(status);
+            
         }
+
+
+        private void StatusHandler(ApplicationStatus status)
+        {
+            switch (status)
+            {
+                case ApplicationStatus.Help:
+                    //DAMIANO
+                    break;
+                case ApplicationStatus.Training:
+                    simpleNeuralNetwork.Train(img.Image, Loader.epochMaxNumber);
+                    break;
+                case ApplicationStatus.Recognition:
+                    simpleNeuralNetwork.PushInputValues();
+                    break;
+            }
+        }
+
     }
 }
