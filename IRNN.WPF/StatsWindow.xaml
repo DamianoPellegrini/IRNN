@@ -22,14 +22,27 @@
         <ListView x:Name="lst_layers" Grid.Row="1" Margin="5" SelectionChanged="lst_layers_SelectionChanged">
 
         </ListView>
-        <spr:SparrowChart Grid.Column="1" Margin="5">
+        <spr:SparrowChart x:Name="crt_error" Grid.Column="1" Margin="5">
             <spr:SparrowChart.YAxis>
-                <spr:LinearYAxis Header="Loss%"/>
+                <spr:LinearYAxis Header="Global error, ETA" MinValue="0" MaxValue="10" />
             </spr:SparrowChart.YAxis>
             <spr:SparrowChart.XAxis>
-                <spr:DateTimeXAxis/>
+                <spr:LinearXAxis Header="Epoch" MinValue="0" MaxValue="450" />
             </spr:SparrowChart.XAxis>
-
+            <spr:SparrowChart.Series>
+                <spr:SplineSeries x:Name="spl_error" Stroke="Green" StrokeThickness="2">
+                    <!--<spr:SplineSeries.Points>
+                        <spr:DoublePoint Data="10" Value="0"/>
+                        <spr:DoublePoint Data="450" Value="2"/>
+                    </spr:SplineSeries.Points>-->
+                </spr:SplineSeries>
+                <spr:SplineSeries x:Name="spl_general" Stroke="Black" StrokeThickness="2" >
+                    <spr:SplineSeries.Points>
+                        <spr:DoublePoint Data="0" Value="1"/>
+                        <spr:DoublePoint Data="450" Value="0.5"/>
+                    </spr:SplineSeries.Points>
+                </spr:SplineSeries>
+            </spr:SparrowChart.Series>
         </spr:SparrowChart>
         <Grid Grid.Row="1" Grid.Column="1">
             <Label Content="Neuron weight etc..."/>
