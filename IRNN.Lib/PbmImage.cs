@@ -13,6 +13,7 @@ namespace IRNN
     public class PBMImage
     {
         //TODO Magari aggiungere un tipo tipo il P1
+        //aggiunto metodo JaggedArray
 
 
         private byte[,] data;
@@ -115,6 +116,27 @@ namespace IRNN
 
             return arr;
         }
+
+        /// <summary>
+        /// Convert the matrix to a jagged array.
+        /// </summary>
+        /// <returns>The jagged array.</returns>
+        public byte[][] ConvertMatToJaggedArray()
+        {
+            byte[][] jaggedArray = new byte[Height][];
+
+            for (int i = 0; i < Height; i++)
+            {
+                jaggedArray[i] = new byte[Width];
+                for (int j = 0; j < Width; j++)
+                {
+                    jaggedArray[i][j] = (byte)Image[i, j];
+                }
+            }
+
+            return jaggedArray;
+        }
+        
 
         /// <summary>
         /// Load the image from path

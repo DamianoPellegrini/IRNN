@@ -37,10 +37,12 @@ namespace IRNN
                     //DAMIANO
                     break;
                 case ApplicationStatus.Training:
-                    simpleNeuralNetwork.Train(img.Image, Loader.epochMaxNumber);
-                    break;
+                    if (simpleNeuralNetwork.Train(img.ConvertMatToJaggedArray(), Loader.epochMaxNumber))
+                        //
+                        //implementare output rispetto all'andamento del training
+                        break;
                 case ApplicationStatus.Recognition:
-                    simpleNeuralNetwork.PushInputValues();
+                    simpleNeuralNetwork.PushInputValues(img.ConvertMatToArray());
                     break;
             }
         }

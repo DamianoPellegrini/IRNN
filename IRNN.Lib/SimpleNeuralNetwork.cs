@@ -9,6 +9,7 @@ using NeuralNetworkCSharp.ActivationFunctions;
 using NeuralNetworkCSharp.InputFunctions;
 using NeuralNetworkCSharp.Synapses;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -108,11 +109,17 @@ namespace NeuralNetworkCSharp
         /// </summary>
         /// <param name="inputs">Input values.</param>
         /// <param name="numberOfEpochs">Number of epochs.</param>
-        public void Train(byte[][] inputs, int numberOfEpochs)
+        public bool Train(byte[][] inputs, int numberOfEpochs)
         {
             double totalError = 0;
 
-            for(int i = 0; i < numberOfEpochs; i++)
+            //this csv file contains all the medium error during all the epoch
+
+            StreamWriter streamWriter = new StreamWriter("data.txt");
+
+            File.WriteAllText("data.txt", String.Empty);
+
+            for (int i = 0; i < numberOfEpochs; i++)
             {
                 for(int j = 0; j < inputs.GetLength(0); j ++)
                 {
@@ -128,11 +135,31 @@ namespace NeuralNetworkCSharp
 
                     // Calculate error by summing errors on all output neurons.
                     totalError = CalculateTotalError(outputs, j); //salvare errore nel file.csv
+                    streamWriter.WriteLine(totalError);
+                    
                     HandleOutputLayer(j);
                     HandleHiddenLayers();
                 }
             }
+            streamWriter.Close();
+
+            double Error = 0;
+
+            StreamReader streamReader = new StreamReader("data.txt");
+            while (streamReader.Peek() > 0)
+            {
+                Error += (double.Parse(streamReader.ReadLine()));
+            }
+
+            if ((Error /= numberOfEpochs) <= Loader.minimumError)
+                return true;
+            else
+                return false;
         }
+
+
+
+
 
         /// <summary>
         /// Helper function that creates input layer of the neural network.
