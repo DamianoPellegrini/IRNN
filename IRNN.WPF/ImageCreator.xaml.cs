@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IRNN.WPF.Utils;
 
 namespace IRNN.WPF
 {
@@ -35,6 +36,11 @@ namespace IRNN.WPF
             e.Cancel = true;
             this.Hide();
             _main.MenuWindow.Show();
+        }
+
+        private void menu_salva(object sender, RoutedEventArgs e)
+        {
+            InkCanvasToPBMConverter.InkCanvasToBitmap(grd_inkWrapper);
         }
     }
 }

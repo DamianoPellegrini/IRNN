@@ -14,12 +14,17 @@
         <Menu>
             <MenuItem Header="_File">
                 <MenuItem Header="_Apri immagine"/>
-                <MenuItem Header="_Salva immagini"/>
+                <MenuItem Header="_Salva immagini" Click="menu_salva"/>
                 <Separator/>
                 <MenuItem Header="_Esci"/>
             </MenuItem>
             <MenuItem Header="_Modifica"/>
             <MenuItem Header="_?"/>
         </Menu>
+        <Grid x:Name="grd_inkWrapper" Grid.Row="1">
+            <InkCanvas x:Name="ink_drawingBoard">
+
+            </InkCanvas>
+        </Grid>
     </Grid>
 </Window>
