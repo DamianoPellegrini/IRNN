@@ -1,4 +1,4 @@
-﻿using NeuralNetworkCSharp;
+﻿using NeuralNetworkCSharp.Neuron;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +24,7 @@ namespace IRNN
         {
             this.img = img;
             simpleNeuralNetwork = new SimpleNeuralNetwork();
-            StatusHandler(status);
-            
+            StatusHandler(status);          
         }
 
 
@@ -38,11 +37,16 @@ namespace IRNN
                     break;
                 case ApplicationStatus.Training:
                     if (simpleNeuralNetwork.Train(img.ConvertMatToJaggedArray(), Loader.epochMaxNumber))
+                    { }
                         //
                         //implementare output rispetto all'andamento del training
                         break;
                 case ApplicationStatus.Recognition:
                     simpleNeuralNetwork.PushInputValues(img.ConvertMatToArray());
+                    List<double> output = simpleNeuralNetwork.GetOutput();
+                    switch(output.Find(output => output.Max();) {
+
+                    }//fixare
                     break;
             }
         }

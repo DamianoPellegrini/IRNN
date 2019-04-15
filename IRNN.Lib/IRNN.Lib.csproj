@@ -61,6 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="settings.cfg" />
+    <None Include="trainingset.cfg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Weigth.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

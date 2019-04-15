@@ -5,6 +5,7 @@
  */
 
 using IRNN;
+using NeuralNetworkCSharp.Neuron;
 using NeuralNetworkCSharp.ActivationFunctions;
 using NeuralNetworkCSharp.InputFunctions;
 using NeuralNetworkCSharp.Synapses;
@@ -12,8 +13,9 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 
-namespace NeuralNetworkCSharp
+namespace NeuralNetworkCSharp.Neuron
 {
     /// <summary>
     /// Neural Network implementation.
@@ -134,8 +136,8 @@ namespace NeuralNetworkCSharp
                     });
 
                     // Calculate error by summing errors on all output neurons.
-                    totalError = CalculateTotalError(outputs, j); //salvare errore nel file.csv
-                    streamWriter.WriteLine(totalError);
+                    totalError = CalculateTotalError(outputs, j); 
+                    streamWriter.WriteLine((i + 1).ToString() + "|" + totalError);
                     
                     HandleOutputLayer(j);
                     HandleHiddenLayers();
@@ -152,10 +154,44 @@ namespace NeuralNetworkCSharp
             }
 
             if ((Error /= numberOfEpochs) <= Loader.minimumError)
+            {
+                SaveWeigthOnFile();
                 return true;
+            }
             else
                 return false;
         }
+
+
+
+        /// <summary>
+        /// Save weight onto an xml file for future recognition 
+        /// </summary>
+        private void SaveWeigthOnFile()
+        {
+            File.WriteAllText("Weigth.xml", "");
+            XmlDocument xmlDocument = new XmlDocument();
+
+            XmlNode rootNode = xmlDocument.CreateElement("synapses_weigth");
+            xmlDocument.AppendChild(rootNode);
+
+
+            for(int i = 0; i < _layers.Count - 1; i++)
+            {
+                foreach (Neuron n in _layers[i].Neurons)
+                {
+                    foreach (Synapse s in n.Outputs)
+                    {
+                        XmlNode Synapses = xmlDocument.CreateElement("Synapse");
+                        rootNode.AppendChild(Synapses);
+
+                        XmlNode weigth = xmlDocument.CreateElement("Weigth");
+                        weigth.InnerText = s.Weight.ToString();
+                        Synapses.AppendChild(weigth);
+                    }
+                }
+            }
+        } //prega dio che funzioni sta merda
 
 
 
