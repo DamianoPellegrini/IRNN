@@ -1,7 +1,9 @@
 ﻿using IRNN.WPF.Utils;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace IRNN.WPF {
 
@@ -29,7 +31,10 @@ namespace IRNN.WPF {
 
         private void menu_salva(object sender, RoutedEventArgs e) {
             //TODO: SAVE FILE DIALOG CON PATH
-            InkCanvasToPBMConverter.InkCanvasToBitmap(ink_drawingBoard);
+            BitmapImage bitmap = InkCanvasToPBMConverter.InkCanvasToBitmap(ink_drawingBoard);
+            FileStream fs = File.Create("test.bmp");
+            bitmap.StreamSource.CopyTo(fs);
+            fs.Close();
         }
 
         private void menu_pulisci(object sender, RoutedEventArgs e) {

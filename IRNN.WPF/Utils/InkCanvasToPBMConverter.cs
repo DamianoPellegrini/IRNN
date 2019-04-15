@@ -30,7 +30,14 @@ namespace IRNN.WPF.Utils
             MemoryStream stream = new MemoryStream();
             encoder.Save(stream);
             BitmapImage ret = new BitmapImage();
-            ret.StreamSource = stream;
+            ret.BeginInit();
+            stream.Position = 0;
+            ret.StreamSource = new MemoryStream();
+            stream.CopyTo(ret.StreamSource);
+            ret.DecodePixelWidth = width;
+            ret.DecodePixelHeight = height;
+            //TODO: non va un bidone di nulla
+            ret.EndInit();
             stream.Close();
             return ret;
         }
