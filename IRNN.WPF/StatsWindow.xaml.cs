@@ -44,20 +44,17 @@ namespace IRNN.WPF
 
         private void caricaGrafico()
         {
-            //prova con i dati a caso
-            spl_error.Points.Add(new DoublePoint() { Data = 10, Value = 2 });
-            spl_error.Points.Add(new DoublePoint() { Data = 450, Value = 5 });
-            //TODO passano un file con lerrore globale per i neuroni di ogni epoca 
-            //tipo file txt separato da virgole  leggere 1 epoca (x) e l'errore (y)
-
-            string path = "";
-            string[,] DatStringError=LeggiFile(); 
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\prova.txt";//TODO mettere la path corretta
+            List<double[]> DatStringError = LeggiFile(path);
+            foreach (double[] line in DatStringError)
+            {
+                spl_error.Points.Add(new DoublePoint() { Data = line[0], Value = line[1] });
+            }
         }
 
-        private string[,] LeggiFile()
+        private List<double[]> LeggiFile(string path)
         {
-            string path="";
-            List<string[]> risultati = new List<string[]>();//lista per aggiungere ogni volta un vettore con ADD
+            List<double[]> risultati = new List<double[]>();
             //TODO fai una lista di lista per ogni volta aggiungere i punti
             if (File.Exists(path))
             {
@@ -67,8 +64,11 @@ namespace IRNN.WPF
                 for (int i = 0; testo != null; i++)
                 {
                     testo = sr.ReadLine();
-                    string[] testo1 = testo.Split(',');
-                    risultati.Add(testo);
+                    if(testo!=null&&testo!="")
+                    {
+                        string[] testo1 = testo.Split('|');
+                        risultati.Add(new double[] { double.Parse(testo1[0]), double.Parse(testo1[1]) });
+                    }
                 }
                 sr.Close();
             }
@@ -76,7 +76,7 @@ namespace IRNN.WPF
             {
                 MessageBox.Show("Error interno mancata creazione file degli errori globali", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
+            return risultati;
         }
         
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
