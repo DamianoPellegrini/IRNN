@@ -23,6 +23,9 @@ namespace IRNN.WPF
         public MenuWindow()
         {
             InitializeComponent();
+            NetworkWindow networkWindow = new NetworkWindow();
+            networkWindow.Show();
+            this.Close();
         }
     }
 }

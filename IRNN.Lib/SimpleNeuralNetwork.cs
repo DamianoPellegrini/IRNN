@@ -50,8 +50,7 @@ namespace NeuralNetworkCSharp.Neuron
             _neuronErrors = new Dictionary<int, double[]>();
             _layerFactory = new NeuralLayerFactory();
 
-            _pbmImage = new PBMImage("nuovaImmagine.pbm");  //^todo
-
+            
             // Create input layer that will collect inputs.
             CreateInputLayer(Loader.height * Loader.width);
 
@@ -75,7 +74,7 @@ namespace NeuralNetworkCSharp.Neuron
         }
 
         /// <summary>
-        /// Push input values to the neural network.
+        /// Pushes input values to the neural network.
         /// </summary>
         public void PushInputValues(byte[] inputs)
         {
@@ -85,7 +84,7 @@ namespace NeuralNetworkCSharp.Neuron
         /// <summary>
         /// Set expected values for the outputs.
         /// </summary>
-        public void PushExpectedValues(double[][] expectedOutputs)
+        public void PushExpectedValues(double[][] expectedOutputs) //capire a cosa serve
         {
             _expectedResult = expectedOutputs;
         }
@@ -117,15 +116,17 @@ namespace NeuralNetworkCSharp.Neuron
 
             //this csv file contains all the medium error during all the epoch
 
+            File.WriteAllText("data.txt", String.Empty);
+
             StreamWriter streamWriter = new StreamWriter("data.txt");
 
-            File.WriteAllText("data.txt", String.Empty);
+
 
             for (int i = 0; i < numberOfEpochs; i++)
             {
                 for(int j = 0; j < inputs.GetLength(0); j ++)
                 {
-                    PushInputValues(inputs[j]);
+                    PushInputValues(_pbmImage.ConvertMatToArray());
 
                     var outputs = new List<double>();
 
@@ -191,7 +192,7 @@ namespace NeuralNetworkCSharp.Neuron
                     }
                 }
             }
-        } //prega dio che funzioni sta merda
+        } 
 
 
 
@@ -208,7 +209,7 @@ namespace NeuralNetworkCSharp.Neuron
         }
 
         /// <summary>
-        /// Hellper function that calculates total error of the neural network.
+        /// Helper function that calculates total error of the neural network.
         /// </summary>
         private double CalculateTotalError(List<double> outputs, int row)
         {

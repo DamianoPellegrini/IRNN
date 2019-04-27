@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IRNN;
 
 namespace IRNN.WPF
 {
@@ -23,6 +24,13 @@ namespace IRNN.WPF
         public NetworkWindow()
         {
             InitializeComponent();
+        }
+
+        private void btn_inutile_Click(object sender, RoutedEventArgs e)
+        {
+            PBMImage pBMImage = new PBMImage(@"C:\Users\antonio.dimeglio\Desktop\immagini\luna.pbm");
+            NeuralNetworkEngine neuralNetworkEngine = new NeuralNetworkEngine(pBMImage, NeuralNetworkEngine.ApplicationStatus.Training);
+            MessageBox.Show(neuralNetworkEngine.StatusHandler(NeuralNetworkEngine.ApplicationStatus.Training));
         }
     }
 }

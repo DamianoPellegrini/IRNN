@@ -143,5 +143,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IRNN.Lib\IRNN.Lib.csproj">
+      <Project>{995a48aa-d63c-4f74-b6b0-8b875d79cd1e}</Project>
+      <Name>IRNN.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

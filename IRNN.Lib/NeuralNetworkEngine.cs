@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace IRNN
 {
@@ -14,7 +15,7 @@ namespace IRNN
     //routine: caricare i parametri, training set 
     //gestire numero neuroni inserito da utente ed epoche
     //implementare apprendimento ed esecuzione 
-    class NeuralNetworkEngine
+    public class NeuralNetworkEngine
     {
         PBMImage img;
         SimpleNeuralNetwork simpleNeuralNetwork; 
@@ -24,32 +25,67 @@ namespace IRNN
         {
             this.img = img;
             simpleNeuralNetwork = new SimpleNeuralNetwork();
-            StatusHandler(status);          
+            simpleNeuralNetwork._pbmImage = img;
         }
 
 
-        private void StatusHandler(ApplicationStatus status)
+        public string StatusHandler(ApplicationStatus status)
         {
             switch (status)
             {
                 case ApplicationStatus.Help:
-                    //DAMIANO
-                    break;
+                    return "l'app dovrebbe riconoscere le immagini passate in input";                
                 case ApplicationStatus.Training:
                     if (simpleNeuralNetwork.Train(img.ConvertMatToJaggedArray(), Loader.epochMaxNumber))
-                    { }
-                        //
-                        //implementare output rispetto all'andamento del training
-                        break;
+                    {
+                        return "Training eseguito con successo";
+                    }
+                    else
+                    {
+                        return "Training fallito, ricalcolare i pesi";
+                    }
                 case ApplicationStatus.Recognition:
+                    string[] classes = CaricaClassi();
                     simpleNeuralNetwork.PushInputValues(img.ConvertMatToArray());
                     List<double> output = simpleNeuralNetwork.GetOutput();
-                    switch(output.Find(output => output.Max();) {
-
-                    }//fixare
-                    break;
+                    int classeOutput = RicercaElementoMax(output);
+                    //TODO agggiungere caso in cui non viene assolutamente riconosciuta l'immagine
+                    return "L'elemento ottenuto ricorda vagamente forse potrebbe un " + classes[classeOutput] + " .";                    
             }
+
+            return "";
         }
 
+        private string[] CaricaClassi()
+        {
+            StreamReader sr = new StreamReader("trainingset.cfg");
+            string[] o = new string[Loader.outputClasses];
+
+            int i = 0;
+
+            while (sr.Peek() > 0)
+            {
+                o[i] = sr.ReadLine().Split('.')[0];
+                i++;
+            }
+
+            return o;
+        }
+
+        private int RicercaElementoMax(List<double> output)
+        {
+            double x = -2;
+            int index = 0;
+
+            for (int i = 0; i < output.Count; i++)
+            {
+                if (output[i] > x)
+                {
+                    x = output[i];
+                    index = i;
+                }
+            }
+            return index;
+        }
     }
 }
