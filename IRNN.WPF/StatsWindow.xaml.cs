@@ -22,6 +22,7 @@ namespace IRNN.WPF
     public partial class StatsWindow : Window
     {
         private App _main;
+        
         private NeuralNetwork _network;
         private int NumEpoche;
         public StatsWindow()
@@ -74,7 +75,7 @@ namespace IRNN.WPF
             }
             else
             {
-                MessageBox.Show("Error interno mancata creazione file degli errori globali", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Errore interno mancata creazione file degli errori globali", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return risultati;
         }
@@ -84,7 +85,7 @@ namespace IRNN.WPF
                 return;
             e.Cancel = true;
             this.Hide();
-            _main.MenuWindow.Show();
+            _main.NetworkWindow.Show();
         }
 
         private void caricaLista<T>(ListView listView, List<T> list)
