@@ -14,7 +14,7 @@ namespace IRNN.WPF.Utils
 {
     internal class InkCanvasToPBMConverter
     {
-        internal static BitmapImage InkCanvasToBitmap(InkCanvas canvas)
+        internal static TransformedBitmap InkCanvasToBitmap(InkCanvas canvas)
         {
             //RENDERING
             int width = (int)canvas.ActualWidth;
@@ -27,27 +27,30 @@ namespace IRNN.WPF.Utils
             encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
 
             //SAVING TO BITMAP OBJECT
-            MemoryStream stream = new MemoryStream();
-            encoder.Save(stream);
-            BitmapImage ret = new BitmapImage();
-            ret.BeginInit();
-            stream.Position = 0;
-            ret.StreamSource = new MemoryStream();
-            stream.CopyTo(ret.StreamSource);
-            ret.DecodePixelWidth = width;
-            ret.DecodePixelHeight = height;
-            //TODO: non va un bidone di nulla
-            ret.EndInit();
-            stream.Close();
+            TransformedBitmap ret;
+            FileStream fs = new FileStream("tmp.bmp", FileMode.Create);
+            encoder.Save(fs);
+            fs.Close();
+            BitmapImage bmp = new BitmapImage(new Uri("tmp.bmp",UriKind.Relative));
+            //TODO: non va un bidone di nulla bisoagna ridimensionare l'immagine
+            ret = new TransformedBitmap(bmp, new ScaleTransform(130/ width, 130 / height));
+            //ret.BeginInit();
+            //fs.Position = 0;
+            //fs.CopyTo(ret.StreamSource);
+            //ret.DecodePixelWidth = width;
+            //ret.DecodePixelHeight = height;
+            //ret.EndInit();
+            //fs.Close();
             return ret;
         }
 
-        internal static Color[,] BitmapToColorMatrix(BitmapImage image)
+        internal static Color[,] BitmapToColorMatrix(TransformedBitmap image)
         {
             throw new NotImplementedException();
         }
 
-        internal static object/*TODO: Substitute to PBMImage on merge*/ ColorMatrixToPBMImage(Color[,] image) {
+        internal static object/*TODO: Substitute to PBMImage on merge*/ ColorMatrixToPBMImage(Color[,] image)
+        {
             throw new NotImplementedException();
         }
     }

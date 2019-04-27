@@ -31,10 +31,7 @@ namespace IRNN.WPF {
 
         private void menu_salva(object sender, RoutedEventArgs e) {
             //TODO: SAVE FILE DIALOG CON PATH
-            BitmapImage bitmap = InkCanvasToPBMConverter.InkCanvasToBitmap(ink_drawingBoard);
-            FileStream fs = File.Create("test.bmp");
-            bitmap.StreamSource.CopyTo(fs);
-            fs.Close();
+            TransformedBitmap bitmap = InkCanvasToPBMConverter.InkCanvasToBitmap(ink_drawingBoard);
         }
 
         private void menu_pulisci(object sender, RoutedEventArgs e) {
