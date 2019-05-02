@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using Microsoft.Win32;
 
 namespace IRNN.WPF
 {
@@ -21,6 +23,7 @@ namespace IRNN.WPF
     {
         private App _main;
         private NeuralNetwork _network;
+
         public NetworkWindow()
         {
             InitializeComponent();
@@ -37,6 +40,42 @@ namespace IRNN.WPF
             e.Cancel = true;
             this.Hide();
             _main.MenuWindow.Show();
+        }
+
+        private void menuEsci(object sender, RoutedEventArgs e)
+        {
+            //TODO FERMA ALLENAMENTO?
+            this.Close();
+        }
+
+        private void loadImage(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openfile = new OpenFileDialog();
+            openfile.InitialDirectory = "c:\\Users\\simone.lugaresi\\Desktop";
+            openfile.Filter = "Portable Bitmap Image(*.pbm)|*.pbm";
+            if (openfile.ShowDialog() == true)
+            {
+                string filePath = openfile.FileName;
+                txt_path.Text = filePath;
+                applyImage(filePath);
+            }
+        }
+
+        private void applyImage(string imagePath)
+        {
+            if (!File.Exists(imagePath)) return;
+            img.Source = new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute));
+        }
+
+        private void ApriStatistiche(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            _main.StatisticsWindow.Show();
+        }
+
+        private void txt_path_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            applyImage(txt_path.Text);
         }
     }
 }

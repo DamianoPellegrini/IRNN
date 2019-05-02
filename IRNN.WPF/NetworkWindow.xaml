@@ -5,22 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IRNN.WPF"
         mc:Ignorable="d"
-        Title="NetworkWindow" Height="450" Width="800" Closing="Window_Closing" Initialized="Window_Initialized" WindowStartupLocation="CenterScreen">
+        Title="NetworkWindow" MinHeight="375" MinWidth="540" Height="450" Width="800" Closing="Window_Closing" Initialized="Window_Initialized" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="_File">
-                <MenuItem Header="_Apri immagine"/>
+                <MenuItem Header="_Apri immagine" Click="loadImage"/>
                 <!--<MenuItem Header="_Salva immagini"/>-->
                 <Separator/>
-                <MenuItem Header="_Esci"/>
+                <MenuItem Header="_Esci" Click="menuEsci"/>
             </MenuItem>
-            <MenuItem Header="_Modifica"/>
             <MenuItem Header="_?"/>
         </Menu>
-        
+        <Image x:Name="img" Grid.Row="1" Source="C:\Users\simone.lugaresi\Desktop\piramiscema.png" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="130" MinHeight="130"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2.4*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Padding" Value="4"/>
+                </Style>
+            </Grid.Resources>
+            <Button Content="Apri statistiche" Click="ApriStatistiche"/>
+            <TextBox x:Name="txt_path" Grid.Column="1" Margin="5" TextChanged="txt_path_TextChanged"/>
+            <Button Content="Sfoglia..." Grid.Column="2" Click="loadImage"/>
+            <Button Content="Allena" Grid.Column="4"/>
+            <Button Content="Riconosci" Grid.Column="5"/>
+        </Grid>
     </Grid>
 </Window>
