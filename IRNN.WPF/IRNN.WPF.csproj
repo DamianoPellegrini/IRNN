@@ -77,7 +77,7 @@
     <Compile Include="StatsWindow.xaml.cs">
       <DependentUpon>StatsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utils\InkCanvasToPBMConverter.cs" />
+    <Compile Include="Utils\ImageHelper.cs" />
     <Page Include="ImageCreator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

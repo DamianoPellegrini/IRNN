@@ -12,9 +12,9 @@ using System.Windows.Media.Imaging;
 
 namespace IRNN.WPF.Utils
 {
-    internal class InkCanvasToPBMConverter
+    internal class ImageHelper
     {
-        internal static TransformedBitmap InkCanvasToBitmap(InkCanvas canvas)
+        internal static BitmapImage InkCanvasToBitmap(InkCanvas canvas)
         {
             //RENDERING
             int width = (int)canvas.ActualWidth;
@@ -27,13 +27,20 @@ namespace IRNN.WPF.Utils
             encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
 
             //SAVING TO BITMAP OBJECT
-            TransformedBitmap ret;
+            BitmapImage ret;
             FileStream fs = new FileStream("tmp.bmp", FileMode.Create);
             encoder.Save(fs);
+            //MemoryStream ms = new MemoryStream();
+            //fs.CopyTo(ms);
+            //ms.Position = 0;
+            //ret = new BitmapImage();
+            //ret.BeginInit();
+            //ret.StreamSource = ms;
+            //ret.EndInit();
             fs.Close();
-            BitmapImage bmp = new BitmapImage(new Uri("tmp.bmp",UriKind.Relative));
+            //BitmapImage bmp = new BitmapImage(new Uri("tmp.bmp",UriKind.Relative));
             //TODO: non va un bidone di nulla bisoagna ridimensionare l'immagine
-            ret = new TransformedBitmap(bmp, new ScaleTransform(130/ width, 130 / height));
+            //ret = new TransformedBitmap(bmp, new ScaleTransform(130/ width, 130 / height));
             //ret.BeginInit();
             //fs.Position = 0;
             //fs.CopyTo(ret.StreamSource);
