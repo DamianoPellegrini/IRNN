@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Win32;
+using IRNN.WPF.Utils;
 
 namespace IRNN.WPF
 {
@@ -51,7 +52,7 @@ namespace IRNN.WPF
         private void loadImage(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openfile = new OpenFileDialog();
-            openfile.InitialDirectory = "c:\\Users\\simone.lugaresi\\Desktop";
+            openfile.InitialDirectory = Environment.SpecialFolder.DesktopDirectory.ToString();
             openfile.Filter = "Portable Bitmap Image(*.pbm)|*.pbm";
             if (openfile.ShowDialog() == true)
             {
@@ -64,7 +65,8 @@ namespace IRNN.WPF
         private void applyImage(string imagePath)
         {
             if (!File.Exists(imagePath)) return;
-            img.Source = new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute));
+            PBMImage pbm = new PBMImage(imagePath);
+            GridVisualizer.VisualizeData(grd_img, pbm.Image, typeof(Label));
         }
 
         private void ApriStatistiche(object sender, RoutedEventArgs e)
