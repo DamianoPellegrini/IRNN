@@ -31,7 +31,7 @@ namespace NeuralNetworkCSharp.Neuron
         internal List<NeuralLayer> _layers;
         internal Dictionary<int, double[]> _neuronErrors;
         internal double _learningRate;
-        internal double[][] _expectedResult;
+        internal byte[][] _expectedResult;
 
         public PBMImage _pbmImage;
 
@@ -84,7 +84,7 @@ namespace NeuralNetworkCSharp.Neuron
         /// <summary>
         /// Set expected values for the outputs.
         /// </summary>
-        public void PushExpectedValues(double[][] expectedOutputs) //capire a cosa serve
+        public void PushExpectedValues(byte[][] expectedOutputs) //capire a cosa serve
         {
             _expectedResult = expectedOutputs;
         }
@@ -127,6 +127,7 @@ namespace NeuralNetworkCSharp.Neuron
                 for(int j = 0; j < inputs.GetLength(0); j ++)
                 {
                     PushInputValues(_pbmImage.ConvertMatToArray());
+                    PushExpectedValues(_pbmImage.ConvertMatToJaggedArray());
 
                     var outputs = new List<double>();
 

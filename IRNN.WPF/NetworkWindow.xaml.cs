@@ -28,7 +28,7 @@ namespace IRNN.WPF
 
         private void btn_inutile_Click(object sender, RoutedEventArgs e)
         {
-            PBMImage pBMImage = new PBMImage(@"C:\Users\antonio.dimeglio\Desktop\immagini\luna.pbm");
+            PBMImage pBMImage = new PBMImage(@"C:\Users\niccolo.mussoni\Desktop\immagini\luna.pbm");
             NeuralNetworkEngine neuralNetworkEngine = new NeuralNetworkEngine(pBMImage, NeuralNetworkEngine.ApplicationStatus.Training);
             MessageBox.Show(neuralNetworkEngine.StatusHandler(NeuralNetworkEngine.ApplicationStatus.Training));
         }
