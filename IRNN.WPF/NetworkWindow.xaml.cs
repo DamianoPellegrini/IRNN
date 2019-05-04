@@ -30,12 +30,14 @@ namespace IRNN.WPF
             InitializeComponent();
         }
 
-        private void Window_Initialized(object sender, EventArgs e) {
+        private void Window_Initialized(object sender, EventArgs e)
+        {
             _main = Application.Current as App;
             _network = _main.Network;
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
             if (_main.HasClosed)
                 return;
             e.Cancel = true;
@@ -66,7 +68,8 @@ namespace IRNN.WPF
         {
             if (!File.Exists(imagePath)) return;
             PBMImage pbm = new PBMImage(imagePath);
-            GridVisualizer.VisualizeData(grd_img, pbm.Image, typeof(Label));
+            bool stretched = cmb_aspect.SelectedIndex == 0 ? true : false;//TODO non va stretched
+            GridVisualizer.VisualizeData(grd_img, pbm.Image, stretched ? 1 : sld_scale.Value, stretched ? 1 : sld_scale.Value, stretched ? GridUnitType.Star : GridUnitType.Auto);
         }
 
         private void ApriStatistiche(object sender, RoutedEventArgs e)
@@ -76,6 +79,17 @@ namespace IRNN.WPF
         }
 
         private void txt_path_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            applyImage(txt_path.Text);
+        }
+
+        private void cmb_aspect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            applyImage(txt_path.Text);
+            grd_scale.IsEnabled = cmb_aspect.SelectedIndex == 0 ? false : true;//TODO usa sld al posto di grd
+        }
+
+        private void sld_scale_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             applyImage(txt_path.Text);
         }

@@ -48,7 +48,7 @@ namespace IRNN.WPF.Utils
             //ret.DecodePixelHeight = height;
             //ret.EndInit();
             //fs.Close();
-            return ret;
+            return ret = new BitmapImage(new Uri("tmp.bmp", UriKind.Relative));
         }
 
         internal static Color[,] BitmapToColorMatrix(TransformedBitmap image)
