@@ -13,7 +13,7 @@ namespace IRNN
         //TODO
         public static int height, width, preambleLength, networkLayersNumber, networkInputs, epochMaxNumber, outputClasses;
         public static int[] neuronNumberPerLayer; //length is based off networkLayersNumber
-        public static double minimumError, learningRate;
+        public static double minimumError, learningRate, momentum;
 
         public static void Load()
         {
@@ -52,15 +52,18 @@ namespace IRNN
                     minimumError = double.Parse(tempVar);
                     break;
                 case 6:
-                    learningRate = double.Parse(tempVar);
+                    momentum = double.Parse(tempVar);
                     break;
                 case 7:
-                    epochMaxNumber = int.Parse(tempVar); 
+                    learningRate = double.Parse(tempVar);
                     break;
                 case 8:
-                    outputClasses = int.Parse(tempVar);
+                    epochMaxNumber = int.Parse(tempVar); 
                     break;
                 case 9:
+                    outputClasses = int.Parse(tempVar);
+                    break;
+                case 10:
                     neuronNumberPerLayer = new int[networkLayersNumber];
                     for (int i = 0; i < neuronNumberPerLayer.Length; i++)
                     {

@@ -16,12 +16,12 @@ namespace IRNN
         //aggiunto metodo JaggedArray
 
 
-        private byte[,] data;
+        private double[,] data;
 
         /// <summary>
         /// The image matrix.
         /// </summary>
-        public byte[,] Image
+        public double[,] Image
         {
             get
             {
@@ -58,7 +58,7 @@ namespace IRNN
         /// <summary>
         /// Return the image in a linear array.
         /// </summary>
-        public byte[] Array
+        public double[] Array
         {
             get
             {
@@ -69,7 +69,7 @@ namespace IRNN
         /// <summary>
         /// Return the image in a linear list.
         /// </summary>
-        public List<byte> List
+        public List<double> List
         {
             get
             {
@@ -81,9 +81,9 @@ namespace IRNN
         /// Convert the matrix to a linear list.
         /// </summary>
         /// <returns>The linear list.</returns>
-        public List<byte> ConvertMatToList()
+        public List<double> ConvertMatToList()
         {
-            List<byte> list = new List<byte>();
+            List<double> list = new List<double>();
 
             for (int i = 0; i < Height; i++)
             {
@@ -100,9 +100,9 @@ namespace IRNN
         /// Convert the matrix to a linear array.
         /// </summary>
         /// <returns>The linear array.</returns>
-        public byte[] ConvertMatToArray()
+        public double[] ConvertMatToArray()
         {
-            byte[] arr = new byte[Width * Height];
+            double[] arr = new double[Width * Height];
             int cont = 0;
 
             for (int i = 0; i < Height; i++)
@@ -121,16 +121,16 @@ namespace IRNN
         /// Convert the matrix to a jagged array.
         /// </summary>
         /// <returns>The jagged array.</returns>
-        public byte[][] ConvertMatToJaggedArray()
+        public double[][] ConvertMatToJaggedArray()
         {
-            byte[][] jaggedArray = new byte[Height][];
+            double[][] jaggedArray = new double[Height][];
 
             for (int i = 0; i < Height; i++)
             {
-                jaggedArray[i] = new byte[Width];
+                jaggedArray[i] = new double[Width];
                 for (int j = 0; j < Width; j++)
                 {
-                    jaggedArray[i][j] = (byte)Image[i, j];
+                    jaggedArray[i][j] = (double)Image[i, j];
                 }
             }
 
@@ -157,12 +157,12 @@ namespace IRNN
                 string[] line = file[i].Split(' ');
                 if (i == (0 + comment)) continue;//tipo del formato pbm
                 else if (i == 1 + comment)
-                    data = new byte[int.Parse(line[1]), int.Parse(line[0])]; //ottiene le dimensioni dell matrice
+                    data = new double[int.Parse(line[1]), int.Parse(line[0])]; //ottiene le dimensioni dell matrice
                 else
                 {
                     for (int j = 0; j < Width; j++)
                     {
-                        data[i - 2 - comment, j] = byte.Parse(line[j]);
+                        data[i - 2 - comment, j] = double.Parse(line[j]);
                     }
                 }
 

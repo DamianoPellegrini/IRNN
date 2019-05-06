@@ -20,17 +20,53 @@ namespace IRNN.WPF
     /// </summary>
     public partial class NetworkWindow : Window
     {
+        double[] target1; double[] target2;
+        PBMImage pBMImage1;
+        PBMImage pBMImage2;
+        Network network;
+        List<DataSet> dataSets;
 
-        public NetworkWindow()
+        public NetworkWindow(double[] vet1, double[] vet2)
         {
             InitializeComponent();
+            dataSets = new List<DataSet>();
+            target1 = vet1;
+            target2 = vet2;
+            pBMImage1 = new PBMImage(@"C:\Users\antonio.dimeglio\Desktop\immagini\luna.pbm");
+            pBMImage2 = new PBMImage(@"C:\Users\antonio.dimeglio\Desktop\immagini\casa.pbm");
+            Loader.Load();
+            network = new Network(Loader.networkInputs, Loader.neuronNumberPerLayer, Loader.outputClasses, Loader.learningRate, Loader.momentum);
+            dataSets.Add(new DataSet(pBMImage1.Array, target1));
+            dataSets.Add(new DataSet(pBMImage2.Array, target2));
         }
 
-        private void btn_inutile_Click(object sender, RoutedEventArgs e)
+        private void btn_training_Click(object sender, RoutedEventArgs e)
         {
-            PBMImage pBMImage = new PBMImage(@"C:\Users\antonio.dimeglio\Desktop\immagini\luna.pbm");
-            NeuralNetworkEngine neuralNetworkEngine = new NeuralNetworkEngine(pBMImage, NeuralNetworkEngine.ApplicationStatus.Training);
-            MessageBox.Show(neuralNetworkEngine.StatusHandler(NeuralNetworkEngine.ApplicationStatus.Training));
+            network.Train(dataSets, Loader.minimumError); //sarà possibile implementare anche l'altra tipologia di allenamento 
+            MessageBox.Show("ciao sciro");
         }
+
+        private void btn_test_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Primo");
+            var inputData = pBMImage1.Array;
+            var results = network.Compute(inputData);
+            foreach (double d in results)
+            {
+                MessageBox.Show(d.ToString());
+            }
+
+            MessageBox.Show("Secondo");
+
+            inputData = pBMImage2.Array;
+            results = network.Compute(inputData);
+            foreach (double d in results)
+            {
+                MessageBox.Show(d.ToString());
+            }
+            
+        }
+
+
     }
 }

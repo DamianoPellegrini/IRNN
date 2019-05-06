@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="NetworkWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="btn_inutile" Content="Non va " HorizontalAlignment="Left" Height="256" Margin="126,94,0,0" VerticalAlignment="Top" Width="586" Click="btn_inutile_Click"/>
-
+        <Button x:Name="btn_training" Content="Training" HorizontalAlignment="Left" Height="55" Margin="42,53,0,0" VerticalAlignment="Top" Width="158" Click="btn_training_Click"/>
+        <Button x:Name="btn_test"  Content="Testing" HorizontalAlignment="Left" Height="136" Margin="284,53,0,0" VerticalAlignment="Top" Width="315" Click="btn_test_Click"/>
     </Grid>
 </Window>

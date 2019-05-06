@@ -23,7 +23,7 @@ namespace IRNN.WPF
         public MenuWindow()
         {
             InitializeComponent();
-            NetworkWindow networkWindow = new NetworkWindow();
+            NetworkWindow networkWindow = new NetworkWindow(new double[] { 0, 1, 1, 0, 1}, new double[] { 0, 0, 0, 1});
             networkWindow.Show();
             this.Close();
         }
