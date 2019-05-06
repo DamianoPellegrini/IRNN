@@ -13,18 +13,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using IRNN.WPF.Utils;
 
 namespace IRNN.WPF
 {
     /// <summary>
     /// Logica di interazione per StatsWindow.xaml
     /// </summary>
-    public partial class StatsWindow : Window
+    public partial class StatsWindow : Window, IConnectedWindowProperty
     {
         private App _main;
         
         private NeuralNetwork _network;
-        private int NumEpoche;
+        private int NumEpoche=100;
+        private WindowProperty _prop;
         public StatsWindow()
         {
             InitializeComponent();
@@ -32,8 +34,11 @@ namespace IRNN.WPF
 
         private void Window_Initialized(object sender, EventArgs e) {
             _main = Application.Current as App;
+            _prop = new WindowProperty();
             //TODO prendere dal file (di dime) settings.cfg il numero delle epoche(line 8) salvarno in NumEpoche
-
+            //TODO il 450 sostituirlo con il numero di epoche
+            //(spl_general.Points[1] as DoublePoint).Data = NumEpoche;
+            //TODO cambiare il maxvalue con il numepoche
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -56,7 +61,6 @@ namespace IRNN.WPF
         private List<double[]> LeggiFile(string path)
         {
             List<double[]> risultati = new List<double[]>();
-            //TODO fai una lista di lista per ogni volta aggiungere i punti
             if (File.Exists(path))
             {
                 StreamReader sr = File.OpenText(path);
@@ -115,6 +119,11 @@ namespace IRNN.WPF
 
             var layer = _network.NeuralLayers[lst_layers.SelectedIndex];
             caricaLista(lst_neurons, layer.Neurons);
+        }
+
+        public void Show(WindowProperty prop)
+        {
+            throw new NotImplementedException();
         }
     }
 }

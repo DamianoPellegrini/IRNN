@@ -41,10 +41,6 @@ namespace IRNN.WPF
 
             string window = btn.Name.Substring(4);
             this.Hide();
-            if (window == "stats") {
-                _main.StatisticsWindow.Show();
-                return;
-            }
             (window == "network" ? _main.NetworkWindow as Window : _main.ImageCreatorWindow as Window).Show();
         }
     }

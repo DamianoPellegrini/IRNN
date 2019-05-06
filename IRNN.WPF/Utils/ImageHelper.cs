@@ -14,6 +14,7 @@ namespace IRNN.WPF.Utils
 {
     internal class ImageHelper
     {
+        //TODO: passare path e salvare immagine
         internal static BitmapImage InkCanvasToBitmap(InkCanvas canvas)
         {
             //RENDERING
@@ -40,6 +41,7 @@ namespace IRNN.WPF.Utils
             fs.Close();
             //BitmapImage bmp = new BitmapImage(new Uri("tmp.bmp",UriKind.Relative));
             //TODO: non va un bidone di nulla bisoagna ridimensionare l'immagine
+            //TODO: EDIT: lascio che salva solo il bmp almeno è meglio di nulla
             //ret = new TransformedBitmap(bmp, new ScaleTransform(130/ width, 130 / height));
             //ret.BeginInit();
             //fs.Position = 0;
@@ -56,7 +58,7 @@ namespace IRNN.WPF.Utils
             throw new NotImplementedException();
         }
 
-        internal static object/*TODO: Substitute to PBMImage on merge*/ ColorMatrixToPBMImage(Color[,] image)
+        internal static PBMImage ColorMatrixToPBMImage(Color[,] image)
         {
             throw new NotImplementedException();
         }

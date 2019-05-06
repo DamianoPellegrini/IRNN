@@ -68,7 +68,7 @@ namespace IRNN.WPF
         {
             if (!File.Exists(imagePath)) return;
             PBMImage pbm = new PBMImage(imagePath);
-            bool stretched = cmb_aspect.SelectedIndex == 0 ? true : false;//TODO non va stretched
+            bool stretched = cmb_aspect.SelectedIndex == 0 ? true : false;
             GridVisualizer.VisualizeData(grd_img, pbm.Image, stretched ? 1 : sld_scale.Value, stretched ? 1 : sld_scale.Value, stretched ? GridUnitType.Star : GridUnitType.Auto);
         }
 
@@ -86,7 +86,7 @@ namespace IRNN.WPF
         private void cmb_aspect_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             applyImage(txt_path.Text);
-            grd_scale.IsEnabled = cmb_aspect.SelectedIndex == 0 ? false : true;//TODO usa sld al posto di grd
+            sld_scale.IsEnabled = cmb_aspect.SelectedIndex == 0 ? false : true;
         }
 
         private void sld_scale_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

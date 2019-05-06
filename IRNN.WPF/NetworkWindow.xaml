@@ -43,11 +43,11 @@
             <Button Content="Apri statistiche" Click="ApriStatistiche"/>
 
             <!--Image-->
-            <TextBox x:Name="txt_path" Grid.Column="1" Margin="5" TextChanged="txt_path_TextChanged"/>
+            <TextBox x:Name="txt_path" Grid.Column="1" Margin="5" TextChanged="txt_path_TextChanged" VerticalAlignment="Center"/>
             <Button Content="Sfoglia..." Grid.Column="2" Click="loadImage"/>
             
             <!--Scale-->
-            <Grid x:Name="grd_scale"  Grid.Column="3" IsEnabled="False">
+            <Grid Grid.Column="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>

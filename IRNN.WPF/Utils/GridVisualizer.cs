@@ -38,7 +38,12 @@ namespace IRNN.WPF.Utils
                 for (int j = 0; j < data.GetLength(1); j++)
                 {
                     UIElement item = new UIElement();
-                    item = new Label() { MinWidth = columnWidth, MinHeight = rowHeight, Background = data[i, j] == 0 ? Brushes.White : Brushes.Black };
+                    item = new Label() { MinHeight = rowHeight, MinWidth = columnWidth, Background = data[i, j] == 0 ? Brushes.White : Brushes.Black };
+                    if (unitType == GridUnitType.Star)
+                    {
+                        (item as Label).MinHeight = 0b10000000000000;
+                        (item as Label).MinWidth = 0b10000000000000; 
+                    }
                     Grid.SetRow(item, i);
                     Grid.SetColumn(item, j);
 

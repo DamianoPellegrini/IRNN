@@ -26,7 +26,6 @@
             </StackPanel.Resources>
             <Button x:Name="btn_editor" Content="Image editor" Click="openWindow"/>
             <Button x:Name="btn_network" Content="Neural network" Click="openWindow"/>
-            <Button x:Name="btn_stats" Content="Statistics REMOVE THIS" Click="openWindow"/>
         </StackPanel>
     </Grid>
 </Window>
