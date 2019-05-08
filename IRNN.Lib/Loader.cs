@@ -23,7 +23,8 @@ namespace IRNN
             string tempVar;
             while (sr.Peek() > 0)
             {
-                tempVar = sr.ReadLine().Trim().Split('=')[1];
+                tempArr = sr.ReadLine().Trim().Split('=');
+                tempVar = tempArr[1];
                 AllocateVariable(tempVar, cont);
                 cont++;
             }

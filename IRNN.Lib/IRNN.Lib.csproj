@@ -32,8 +32,12 @@
     <DocumentationFile>..\bin\Release\IRNNlib.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\ExportHelper.cs" />
+    <Compile Include="Helper\HelperNetwork.cs" />
+    <Compile Include="Helper\ImportHelper.cs" />
     <Compile Include="Neural Network\Dataset.cs" />
     <Compile Include="Loader.cs" />
     <Compile Include="Neural Network\Network.cs" />
@@ -52,11 +59,7 @@
     <Compile Include="Neural Network\Synapse.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="settings.cfg" />
-    <None Include="trainingset.cfg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Weigth.xml" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

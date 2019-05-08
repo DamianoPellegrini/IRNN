@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.IO;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -20,9 +21,7 @@ namespace IRNN.WPF
     /// </summary>
     public partial class NetworkWindow : Window
     {
-        double[] target1; double[] target2;
-        PBMImage pBMImage1;
-        PBMImage pBMImage2;
+
         Network network;
         List<DataSet> dataSets;
 
@@ -30,14 +29,33 @@ namespace IRNN.WPF
         {
             InitializeComponent();
             dataSets = new List<DataSet>();
-            target1 = vet1;
-            target2 = vet2;
-            pBMImage1 = new PBMImage(@"C:\Users\antonio.dimeglio\Desktop\immagini\luna.pbm");
-            pBMImage2 = new PBMImage(@"C:\Users\antonio.dimeglio\Desktop\immagini\casa.pbm");
             Loader.Load();
-            network = new Network(Loader.networkInputs, Loader.neuronNumberPerLayer, Loader.outputClasses, Loader.learningRate, Loader.momentum);
-            dataSets.Add(new DataSet(pBMImage1.Array, target1));
-            dataSets.Add(new DataSet(pBMImage2.Array, target2));
+            CreateDataSet();
+            network = new Network(Loader.networkInputs, Loader.neuronNumberPerLayer, Loader.outputClasses, null, null);
+        }
+
+        private void CreateDataSet()
+        {
+            StreamReader sr = new StreamReader(Directory.GetCurrentDirectory() + "\\Images\\trainingset.cfg");
+            List<string> temp = new List<string>();
+            PBMImage image;
+            while (sr.Peek() > 0)
+            {
+                temp.Add(sr.ReadLine());
+            }
+            string[] arrTemp = new string[2];
+
+            for (int i = 0; i < temp.Count; i++)
+            {
+                arrTemp = temp[i].Split('|');
+                double[] output = new double[arrTemp[1].Split('.').Length];
+                for (int j = 0; j < output.Length; j++)
+                {
+                    output[j] = Convert.ToDouble(arrTemp[1].Split('.')[j]);
+                }
+                image = new PBMImage(Directory.GetCurrentDirectory() + "\\Images\\" + arrTemp[0]);
+                dataSets.Add(new DataSet(image.ConvertMatToArray(), output));
+            }
         }
 
         private void btn_training_Click(object sender, RoutedEventArgs e)
@@ -48,22 +66,6 @@ namespace IRNN.WPF
 
         private void btn_test_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Primo");
-            var inputData = pBMImage1.Array;
-            var results = network.Compute(inputData);
-            foreach (double d in results)
-            {
-                MessageBox.Show(d.ToString());
-            }
-
-            MessageBox.Show("Secondo");
-
-            inputData = pBMImage2.Array;
-            results = network.Compute(inputData);
-            foreach (double d in results)
-            {
-                MessageBox.Show(d.ToString());
-            }
             
         }
 

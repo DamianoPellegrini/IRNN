@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Diagnostics;
 
 namespace IRNN
 {
@@ -61,18 +63,24 @@ namespace IRNN
 		#region -- Training --
 		public void Train(List<DataSet> dataSets, int numEpochs)
 		{
-			for (var i = 0; i < numEpochs; i++)
+            File.WriteAllText(Directory.GetCurrentDirectory() + "\\data.txt", "");
+            var errors = new List<double>();
+            for (var i = 0; i < numEpochs; i++)
 			{
 				foreach (var dataSet in dataSets)
 				{
 					ForwardPropagate(dataSet.Values);
 					BackPropagate(dataSet.Targets);
-				}
-			}
+                    errors.Add(CalculateError(dataSet.Targets));
+                }
+                WriteErrorOnFile(errors.Average(), i);
+                Debug.WriteLine(errors.Average() + "|" +  i);
+            }
 		}
 
 		public void Train(List<DataSet> dataSets, double minimumError)
 		{
+            File.WriteAllText(Directory.GetCurrentDirectory() + "\\data.txt", "");
 			var error = 1.0;
 			var numEpochs = 0;
 
@@ -87,10 +95,12 @@ namespace IRNN
 				}
 				error = errors.Average();
 				numEpochs++;
-			}
+                WriteErrorOnFile(error, numEpochs);
+                Debug.WriteLine(errors.Average() + "|" + numEpochs);
+            }
 		}
 
-		private void ForwardPropagate(params double[] inputs)
+        private void ForwardPropagate(params double[] inputs)
 		{
 			var i = 0;
 			InputLayer.ForEach(a => a.Value = inputs[i++]);
@@ -118,7 +128,7 @@ namespace IRNN
 		private double CalculateError(params double[] targets)
 		{
 			var i = 0;
-			return OutputLayer.Sum(a => Math.Abs(a.CalculateError(targets[i++])));
+			return OutputLayer.Sum(a => Math.Abs(a.CalculateError(targets[i+1])));
 		}
 		#endregion
 
@@ -127,11 +137,20 @@ namespace IRNN
 		{
 			return 2 * Random.NextDouble() - 1;
 		}
-		#endregion
-	}
 
-	#region -- Enum --
-	public enum TrainingType
+        private void WriteErrorOnFile(double error, int currentEpoch)
+        {
+            StreamWriter sw = File.AppendText(Directory.GetCurrentDirectory() + "\\data.txt");
+            sw.WriteLine((currentEpoch + 1) + "|" + error);
+            sw.Close();
+        }
+
+
+        #endregion
+    }
+
+    #region -- Enum --
+    public enum TrainingType
 	{
 		Epoch,
 		MinimumError
