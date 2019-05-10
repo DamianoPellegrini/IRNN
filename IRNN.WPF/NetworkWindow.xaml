@@ -5,8 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IRNN.WPF"
         mc:Ignorable="d"
-        Title="NetworkWindow" Height="450" Width="800">
+        Title="NetworkWindow" MinHeight="375" MinWidth="540" Height="450" Width="800" Closing="Window_Closing" Initialized="Window_Initialized" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="_File">
+                <MenuItem Header="_Apri immagine" Click="loadImage"/>
+                <!--<MenuItem Header="_Salva immagini"/>-->
+                <Separator/>
+                <MenuItem Header="_Esci" Click="menuEsci"/>
+            </MenuItem>
+            <MenuItem Header="_?"/>
+        </Menu>
+        <Grid x:Name="grd_img" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         
+        <!--Toolbox and image-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Padding" Value="4"/>
+                </Style>
+            </Grid.Resources>
+            <Button Content="Apri statistiche" Click="ApriStatistiche"/>
+
+            <!--Image-->
+            <TextBox x:Name="txt_path" Grid.Column="1" Margin="5" TextChanged="txt_path_TextChanged" VerticalAlignment="Center"/>
+            <Button Content="Sfoglia..." Grid.Column="2" Click="loadImage"/>
+            
+            <!--Scale-->
+            <Grid Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Scale:" Margin="5"/>
+                <Slider x:Name="sld_scale" Maximum="100" SmallChange="1" Margin="5" AutoToolTipPlacement="TopLeft" Value="25" TickPlacement="BottomRight" Grid.Column="1" TickFrequency="11" ValueChanged="sld_scale_ValueChanged"/>
+            </Grid>
+
+            <!--Aspect-->
+            <ComboBox x:Name="cmb_aspect" Grid.Column="4" Margin="8" SelectedIndex="0" SelectionChanged="cmb_aspect_SelectionChanged">
+                <ComboBoxItem Content="Stretch"/>
+                <ComboBoxItem Content="Keep Aspect"/>
+            </ComboBox>
+
+            <!--NeuralNetwork controls-->
+            <Button Content="Allena" Grid.Column="5"/>
+            <Button Content="Riconosci" Grid.Column="6"/>
+        </Grid>
     </Grid>
 </Window>
