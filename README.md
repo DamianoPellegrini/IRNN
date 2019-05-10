@@ -5,9 +5,9 @@
 This is a school project. The system needs to be able to recognize images using a neural network.
 
 ## Goals
-- [ ] Image creation module which will be used to create suitable image for the program.
-- [ ] Interface for statistic and usage of the program.
-- [ ] Neural network.
+~~- [ ] Image creation module which will be used to create suitable image for the program~~
+- [x] Interface for statistic and usage of the program.
+- [x] Neural network.
 
 ## Releases
 None for now.
@@ -26,10 +26,15 @@ List of features:
 List of features:
 - Menu window
 - Image creation window
-- User Interface in general
+- Every WPF UI
+- Some network window image-related features
+- Application multi-window system
 #### Niccolo Mussoni
 List of features:
-- Statistics window, and profiling
+- Artificial Neural Network
 #### Simone Lugaresi
 List of features:
-- Statistics window, and profiling
+- Statistics system
+- Chart system
+- Single Neuron/Layer Visualizer
+- Statistics and Network window
