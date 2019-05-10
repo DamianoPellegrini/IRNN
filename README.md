@@ -29,6 +29,7 @@ List of features:
 - Every WPF UI
 - Some network window image-related features
 - Application multi-window system
+- PBM ASCII Image loader/wrapper
 #### Niccolo Mussoni
 List of features:
 - Artificial Neural Network
