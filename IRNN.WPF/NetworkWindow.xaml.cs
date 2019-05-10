@@ -74,7 +74,7 @@ namespace IRNN.WPF
 
         private void ApriStatistiche(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.Hide();
             _main.StatisticsWindow.Show();
         }
 
