@@ -5,7 +5,7 @@
 This is a school project. The system needs to be able to recognize images using a neural network.
 
 ## Goals
-~~- [ ] Image creation module which will be used to create suitable image for the program~~
+- [ ] ~~Image creation module which will be used to create suitable image for the program~~
 - [x] Interface for statistic and usage of the program.
 - [x] Neural network.
 
