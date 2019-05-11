@@ -9,8 +9,6 @@ namespace IRNN
 {
     public static class Loader
     {       
-
-        //TODO
         public static int height, width, preambleLength, networkLayersNumber, networkInputs, epochMaxNumber, outputClasses;
         public static int[] neuronNumberPerLayer; //length is based off networkLayersNumber
         public static double minimumError, learningRate, momentum;

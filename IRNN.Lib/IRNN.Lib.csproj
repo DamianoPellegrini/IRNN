@@ -54,10 +54,6 @@
     <Compile Include="Neural Network\Network.cs" />
     <Compile Include="Neural Network\Neuron.cs" />
     <Compile Include="PBMImage.cs" />
-    <Compile Include="NeuralLayer.cs" />
-    <Compile Include="NeuralNetwork.cs" />
-    <Compile Include="Neuron.cs" />
-    <Compile Include="PbmImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Neural Network\Sigmoid.cs" />
     <Compile Include="Neural Network\Synapse.cs" />

@@ -18,7 +18,7 @@ namespace IRNN.WPF
         private NetworkWindow _netWnd;
         private StatsWindow _statsWnd;
         private ImageCreator _imgWnd;
-        private NeuralNetwork _network;
+        private Network _network;
 
         /// <summary>
         /// If the main window is closing this, if true, will prevent other windows from not closing.
@@ -69,7 +69,7 @@ namespace IRNN.WPF
         /// <summary>
         /// Neural Network that handle everything.
         /// </summary>
-        public NeuralNetwork Network {
+        public Network Network {
             get {
                 return _network;
             }
@@ -80,11 +80,12 @@ namespace IRNN.WPF
 
         public App() : base()
         {
+            Loader.Load();
             _menuWnd = MainWindow as MenuWindow;
             _netWnd = new NetworkWindow();
             _statsWnd = new StatsWindow();
             _imgWnd = new ImageCreator();
-            _network = new NeuralNetwork();
+            _network = new Network(Loader.networkInputs, Loader.neuronNumberPerLayer, Loader.outputClasses, Loader.epochMaxNumber, Loader.minimumError);
 
             HasClosed = false;
         }

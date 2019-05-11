@@ -28,7 +28,7 @@ namespace IRNN.WPF.Utils
             }
         }
 
-        public static void VisualizeData(Grid grd, Byte[,] data, double rowHeight, double columnWidth, GridUnitType unitType)
+        public static void VisualizeData(Grid grd, double[,] data, double rowHeight, double columnWidth, GridUnitType unitType)
         {
             grd.Children.Clear();
             CreateRows(grd, data.GetLength(0), rowHeight, unitType);

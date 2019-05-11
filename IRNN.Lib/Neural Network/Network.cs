@@ -141,7 +141,7 @@ namespace IRNN
         private void WriteErrorOnFile(double error, int currentEpoch)
         {
             StreamWriter sw = File.AppendText(Directory.GetCurrentDirectory() + "\\data.txt");
-            sw.WriteLine((currentEpoch + 1) + "|" + error);
+            sw.WriteLine((currentEpoch) + "|" + error);
             sw.Close();
         }
 

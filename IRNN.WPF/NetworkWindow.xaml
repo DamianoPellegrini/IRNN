@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IRNN.WPF"
         mc:Ignorable="d"
-        Title="NetworkWindow" MinHeight="375" MinWidth="540" Height="450" Width="800" Closing="Window_Closing" Initialized="Window_Initialized" WindowStartupLocation="CenterScreen">
+        Title="NetworkWindow" MinHeight="375" MinWidth="540" Height="450" Width="800" Closing="Window_Closing" Initialized="Window_Initialized" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <!--
         <Button x:Name="btn_trainingEpoch" Content="Training on epoch" HorizontalAlignment="Left" Height="55" Margin="42,20,0,0" VerticalAlignment="Top" Width="158" Click="btn_training_Click"/>
@@ -16,7 +16,10 @@
         -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu>
@@ -28,17 +31,12 @@
             </MenuItem>
             <MenuItem Header="_?"/>
         </Menu>
-        <Grid x:Name="grd_img" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        
-        <!--Toolbox and image-->
-        <Grid Grid.Row="2">
+
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="0.8*"/>
-                <ColumnDefinition Width="0.4*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.Resources>
@@ -47,14 +45,12 @@
                     <Setter Property="Padding" Value="4"/>
                 </Style>
             </Grid.Resources>
-            <Button Content="Apri statistiche" Click="ApriStatistiche"/>
-
             <!--Image-->
-            <TextBox x:Name="txt_path" Grid.Column="1" Margin="5" TextChanged="txt_path_TextChanged" VerticalAlignment="Center"/>
-            <Button Content="Sfoglia..." Grid.Column="2" Click="loadImage"/>
-            
+            <TextBox x:Name="txt_path" Grid.Column="0" Margin="5" TextChanged="txt_path_TextChanged" VerticalAlignment="Center"/>
+            <Button Content="Sfoglia..." Grid.Column="1" Click="loadImage"/>
+
             <!--Scale-->
-            <Grid Grid.Column="3">
+            <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
@@ -68,10 +64,38 @@
                 <ComboBoxItem Content="Stretch"/>
                 <ComboBoxItem Content="Keep Aspect"/>
             </ComboBox>
+        </Grid>
+        <Separator Grid.Row="2"/>
+        <Grid x:Name="grd_img" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Separator Grid.Row="4"/>
+        <!--Toolbox and image-->
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Padding" Value="4"/>
+                </Style>
+            </Grid.Resources>
+            <Button Content="Apri statistiche" Click="ApriStatistiche"/>
 
             <!--NeuralNetwork controls-->
-            <Button Content="Allena" Grid.Column="5"/>
-            <Button Content="Riconosci" Grid.Column="6"/>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <RadioButton x:Name="rdbEpoch" Content="Epoche" GroupName="train" IsChecked="True"/>
+                <RadioButton Grid.Row="1" Content="Errore minimo"  GroupName="train"/>
+            </Grid>
+            <Button Content="Allena" Grid.Column="3" Click="startTraining"/>
+            <Button Content="Riconosci" Grid.Column="4" Click="startRecognition"/>
         </Grid>
     </Grid>
 </Window>

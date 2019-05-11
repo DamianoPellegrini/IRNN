@@ -24,7 +24,7 @@ namespace IRNN.WPF
     {
         private App _main;
         
-        private NeuralNetwork _network;
+        private Network _network;
         private int NumEpoche=100;
         private WindowProperty _prop;
         public StatsWindow()
@@ -35,22 +35,24 @@ namespace IRNN.WPF
         private void Window_Initialized(object sender, EventArgs e) {
             _main = Application.Current as App;
             _prop = new WindowProperty();
-            //TODO prendere dal file (di dime) settings.cfg il numero delle epoche(line 8) salvarno in NumEpoche
-            //TODO il 450 sostituirlo con il numero di epoche
-            //(spl_general.Points[1] as DoublePoint).Data = NumEpoche;
-            //TODO cambiare il maxvalue con il numepoche
+            var max = Loader.epochMaxNumber;
+            epochAxis.MaxValue = max;
+            epochAxis.Interval = max / 10;
+            //Imposta la linea dell'errore ipotico al coso max
+            (spl_general.Points[1] as DoublePoint).Data = max;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _network = _main.Network;
             caricaGrafico();
-            caricaLista(lst_layers, _network.NeuralLayers);
+            //TODO sistema
+            //caricaLista(lst_layers, _network.NeuralLayers);
         }
 
         private void caricaGrafico()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\prova.txt";//TODO mettere la path corretta
+            string path = Directory.GetCurrentDirectory() + "\\data.txt";
             List<double[]> DatStringError = LeggiFile(path);
             foreach (double[] line in DatStringError)
             {
@@ -103,11 +105,12 @@ namespace IRNN.WPF
             if (lst_neurons.SelectedIndex == -1) return;
             if (lst_layers.SelectedIndex == -1)
                 return;
-            if (_network.NeuralLayers[lst_layers.SelectedIndex] == null) return;
-            if (_network.NeuralLayers[lst_layers.SelectedIndex].Neurons[lst_neurons.SelectedIndex] == null)
-                return;
+            //TODO sistema
+            //if (_network.NeuralLayers[lst_layers.SelectedIndex] == null) return;
+            //if (_network.NeuralLayers[lst_layers.SelectedIndex].Neurons[lst_neurons.SelectedIndex] == null)
+            //    return;
 
-            var neuron = _network.NeuralLayers[lst_layers.SelectedIndex].Neurons[lst_neurons.SelectedIndex];
+            //var neuron = _network.NeuralLayers[lst_layers.SelectedIndex].Neurons[lst_neurons.SelectedIndex];
             //TODO gestire la stampa del neurone con il toString
             
         }
@@ -115,10 +118,11 @@ namespace IRNN.WPF
         private void lst_layers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lst_layers.SelectedIndex == -1) return;
-            if (_network.NeuralLayers[lst_layers.SelectedIndex] == null) return;
+            //TODO sistema
+            //if (_network.NeuralLayers[lst_layers.SelectedIndex] == null) return;
 
-            var layer = _network.NeuralLayers[lst_layers.SelectedIndex];
-            caricaLista(lst_neurons, layer.Neurons);
+            //var layer = _network.NeuralLayers[lst_layers.SelectedIndex];
+            //caricaLista(lst_neurons, layer.Neurons);
         }
 
         public void Show(WindowProperty prop)
