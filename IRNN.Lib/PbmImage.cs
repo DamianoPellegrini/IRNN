@@ -13,9 +13,6 @@ namespace IRNN
     public class PBMImage
     {
         //TODO Magari aggiungere un tipo tipo il P1
-        //aggiunto metodo JaggedArray
-
-
         private double[,] data;
 
         /// <summary>
