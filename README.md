@@ -22,6 +22,7 @@ List of features:
 #### Antonio Di Meglio
 List of features:
 - Artificial Neural Network
+- Utility classes for the neural network
 #### Damiano Pellegrini
 List of features:
 - Menu window

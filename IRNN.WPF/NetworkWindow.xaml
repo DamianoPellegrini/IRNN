@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="NetworkWindow" MinHeight="375" MinWidth="540" Height="450" Width="800" Closing="Window_Closing" Initialized="Window_Initialized" WindowStartupLocation="CenterScreen">
     <Grid>
+        <!--
+        <Button x:Name="btn_trainingEpoch" Content="Training on epoch" HorizontalAlignment="Left" Height="55" Margin="42,20,0,0" VerticalAlignment="Top" Width="158" Click="btn_training_Click"/>
+        <Button x:Name="btn_test"  Content="Testing" HorizontalAlignment="Left" Height="55" Margin="42,187,0,0" VerticalAlignment="Top" Width="158" Click="btn_test_Click" RenderTransformOrigin="0.494,0.527"/>
+        <Button x:Name="btn_save" Content="Save Neural Network" HorizontalAlignment="Left" Height="55" Margin="472,20,0,0" VerticalAlignment="Top" Width="198" Click="Btn_save_Click"/>
+        <Button x:Name="btn_load" Content="Load Neural Network" HorizontalAlignment="Left" Height="55" Margin="217,187,0,0" VerticalAlignment="Top" Width="198" Click="Btn_load_Click"/>
+        <Button x:Name="btn_trainingError" Content="Training on minimum error" HorizontalAlignment="Left" Height="55" Margin="217,20,0,0" VerticalAlignment="Top" Width="162" Click="Btn_trainingError_Click"/>
+        -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
