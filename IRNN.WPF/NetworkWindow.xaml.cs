@@ -50,7 +50,8 @@ namespace IRNN.WPF
             }
         }
 
-        private void Btn_save_Click(object sender, RoutedEventArgs e)
+
+        private void saveNetwork(object sender, RoutedEventArgs e)
         {
             if (isTrainingFinished)
             {
@@ -61,7 +62,7 @@ namespace IRNN.WPF
                 MessageBox.Show("Can't save neural network if no training has been done");
         }
 
-        private void Btn_load_Click(object sender, RoutedEventArgs e)
+        private void loadNetwork(object sender, RoutedEventArgs e)
         {
             _network = ImportHelper.ImportNetwork();
             if (_network == null)
@@ -145,8 +146,8 @@ namespace IRNN.WPF
         private void startRecognition(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.DefaultExt = ".pbm";
-            fileDialog.Filter = "Immagine pbm|.pbm";
+            fileDialog.DefaultExt = "*.pbm";
+            fileDialog.Filter = "Immagine pbm|*.pbm";
 
             if ((bool)fileDialog.ShowDialog())
             {

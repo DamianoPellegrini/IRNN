@@ -85,7 +85,7 @@ namespace IRNN.WPF
             _netWnd = new NetworkWindow();
             _statsWnd = new StatsWindow();
             _imgWnd = new ImageCreator();
-            _network = new Network(Loader.networkInputs, Loader.neuronNumberPerLayer, Loader.outputClasses, Loader.epochMaxNumber, Loader.minimumError);
+            _network = new Network(Loader.networkInputs, Loader.neuronNumberPerLayer, Loader.outputClasses, null, null);
 
             HasClosed = false;
         }

@@ -83,10 +83,11 @@ namespace IRNN
             File.WriteAllText(Directory.GetCurrentDirectory() + "\\data.txt", "");
 			var error = 1.0;
 			var numEpochs = 0;
+            var errors = new List<double>();
 
-			while (error > minimumError && numEpochs < int.MaxValue)
+            while (error > minimumError && numEpochs < int.MaxValue)
 			{
-				var errors = new List<double>();
+
 				foreach (var dataSet in dataSets)
 				{
 					ForwardPropagate(dataSet.Values);
@@ -96,7 +97,7 @@ namespace IRNN
 				error = errors.Average();
 				numEpochs++;
                 WriteErrorOnFile(error, numEpochs);
-                Debug.WriteLine(errors.Average() + "|" + numEpochs);
+                Debug.WriteLine(error + "|" + numEpochs);
             }
 		}
 

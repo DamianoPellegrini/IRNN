@@ -25,6 +25,8 @@
         <Menu>
             <MenuItem Header="_File">
                 <MenuItem Header="_Apri immagine" Click="loadImage"/>
+                <MenuItem Header="_Salva rete neurale" Click="saveNetwork"/>
+                <MenuItem Header="_Carica rete neurale" Click="loadNetwork"/>
                 <!--<MenuItem Header="_Salva immagini"/>-->
                 <Separator/>
                 <MenuItem Header="_Esci" Click="menuEsci"/>
