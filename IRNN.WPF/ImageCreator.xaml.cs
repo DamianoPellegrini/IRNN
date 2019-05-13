@@ -1,6 +1,5 @@
 ﻿using IRNN.WPF.Utils;
 using System;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -13,6 +12,9 @@ namespace IRNN.WPF {
     public partial class ImageCreator : Window {
         private App _main;
 
+        /// <summary>
+        /// Costruttore della finestra per la creazione delle immagini
+        /// </summary>
         public ImageCreator() {
             InitializeComponent();
         }

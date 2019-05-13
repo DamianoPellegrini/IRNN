@@ -9,46 +9,44 @@
         Title="StatsWindow" Height="450" Width="800" Closing="Window_Closing" Initialized="Window_Initialized" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition/>
+            <RowDefinition Height="3*" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <ListView x:Name="lst_neurons" Margin="5" SelectionChanged="lst_neurons_SelectionChanged">
-            
         </ListView>
         <ListView x:Name="lst_layers" Grid.Row="1" Margin="5" SelectionChanged="lst_layers_SelectionChanged">
-
         </ListView>
         <spr:SparrowChart x:Name="crt_error" Grid.Column="1" Margin="5">
             <spr:SparrowChart.Legend>
-                <spr:Legend/>
+                <spr:Legend />
             </spr:SparrowChart.Legend>
             <spr:SparrowChart.YAxis>
-                <spr:LinearYAxis Header="Global error, ETA" MinValue="0" MaxValue="2" Interval="0,2"/>
+                <spr:LinearYAxis Header="Global error, ETA" MinValue="0" MaxValue="2" Interval="0,2" />
             </spr:SparrowChart.YAxis>
             <spr:SparrowChart.XAxis>
-                <spr:LinearXAxis x:Name="epochAxis" Header="Epoch" MinValue="0" MaxValue="450" Interval="25"/>
+                <spr:LinearXAxis x:Name="epochAxis" Header="Epoch" MinValue="0" MaxValue="450" Interval="25" />
             </spr:SparrowChart.XAxis>
             <spr:SparrowChart.Series>
-                <spr:SplineSeries x:Name="spl_general" Stroke="Black" StrokeThickness="2" >
+                <spr:SplineSeries x:Name="spl_general" Stroke="Black" StrokeThickness="2">
                     <spr:SplineSeries.Points>
-                        <spr:DoublePoint Data="0" Value="1"/>
-                        <spr:DoublePoint Data="1000" Value="0"/>
+                        <spr:DoublePoint Data="0" Value="1" />
+                        <spr:DoublePoint Data="1000" Value="0" />
                     </spr:SplineSeries.Points>
                 </spr:SplineSeries>
                 <spr:LineSeries x:Name="spl_error" Stroke="Green" StrokeThickness="2">
                     <!--<spr:SplineSeries.Points>
-                        <spr:DoublePoint Data="10" Value="0"/>
-                        <spr:DoublePoint Data="450" Value="2"/>
+                        <spr:DoublePoint Data="10" Value="0" />
+                        <spr:DoublePoint Data="450" Value="2" />
                     </spr:SplineSeries.Points>-->
                 </spr:LineSeries>
             </spr:SparrowChart.Series>
         </spr:SparrowChart>
         <Grid Grid.Row="1" Grid.Column="1">
-            <Label Content="Neuron weight etc..."/>
+            <Label Content="Neuron weight etc..." />
         </Grid>
     </Grid>
 </Window>

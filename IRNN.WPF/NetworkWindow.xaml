@@ -8,96 +8,96 @@
         Title="NetworkWindow" MinHeight="375" MinWidth="540" Height="450" Width="800" Closing="Window_Closing" Initialized="Window_Initialized" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <!--
-        <Button x:Name="btn_trainingEpoch" Content="Training on epoch" HorizontalAlignment="Left" Height="55" Margin="42,20,0,0" VerticalAlignment="Top" Width="158" Click="btn_training_Click"/>
-        <Button x:Name="btn_test"  Content="Testing" HorizontalAlignment="Left" Height="55" Margin="42,187,0,0" VerticalAlignment="Top" Width="158" Click="btn_test_Click" RenderTransformOrigin="0.494,0.527"/>
-        <Button x:Name="btn_save" Content="Save Neural Network" HorizontalAlignment="Left" Height="55" Margin="472,20,0,0" VerticalAlignment="Top" Width="198" Click="Btn_save_Click"/>
-        <Button x:Name="btn_load" Content="Load Neural Network" HorizontalAlignment="Left" Height="55" Margin="217,187,0,0" VerticalAlignment="Top" Width="198" Click="Btn_load_Click"/>
-        <Button x:Name="btn_trainingError" Content="Training on minimum error" HorizontalAlignment="Left" Height="55" Margin="217,20,0,0" VerticalAlignment="Top" Width="162" Click="Btn_trainingError_Click"/>
+        <Button x:Name="btn_trainingEpoch" Content="Training on epoch" HorizontalAlignment="Left" Height="55" Margin="42,20,0,0" VerticalAlignment="Top" Width="158" Click="btn_training_Click" />
+        <Button x:Name="btn_test"  Content="Testing" HorizontalAlignment="Left" Height="55" Margin="42,187,0,0" VerticalAlignment="Top" Width="158" Click="btn_test_Click" RenderTransformOrigin="0.494,0.527" />
+        <Button x:Name="btn_save" Content="Save Neural Network" HorizontalAlignment="Left" Height="55" Margin="472,20,0,0" VerticalAlignment="Top" Width="198" Click="Btn_save_Click" />
+        <Button x:Name="btn_load" Content="Load Neural Network" HorizontalAlignment="Left" Height="55" Margin="217,187,0,0" VerticalAlignment="Top" Width="198" Click="Btn_load_Click" />
+        <Button x:Name="btn_trainingError" Content="Training on minimum error" HorizontalAlignment="Left" Height="55" Margin="217,20,0,0" VerticalAlignment="Top" Width="162" Click="Btn_trainingError_Click" />
         -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="_File">
-                <MenuItem Header="_Apri immagine" Click="loadImage"/>
-                <MenuItem Header="_Salva rete neurale" Click="saveNetwork"/>
-                <MenuItem Header="_Carica rete neurale" Click="loadNetwork"/>
-                <!--<MenuItem Header="_Salva immagini"/>-->
-                <Separator/>
-                <MenuItem Header="_Esci" Click="menuEsci"/>
+                <MenuItem Header="_Apri immagine" Click="loadImage" />
+                <MenuItem Header="_Salva rete neurale" Click="saveNetwork" />
+                <MenuItem Header="_Carica rete neurale" Click="loadNetwork" />
+                <!--<MenuItem Header="_Salva immagini" />-->
+                <Separator />
+                <MenuItem Header="_Esci" Click="menuEsci" />
             </MenuItem>
-            <MenuItem Header="_?"/>
+            <MenuItem Header="_?" />
         </Menu>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.Resources>
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="Margin" Value="5"/>
-                    <Setter Property="Padding" Value="4"/>
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Padding" Value="4" />
                 </Style>
             </Grid.Resources>
             <!--Image-->
-            <TextBox x:Name="txt_path" Grid.Column="0" Margin="5" TextChanged="txt_path_TextChanged" VerticalAlignment="Center"/>
-            <Button Content="Sfoglia..." Grid.Column="1" Click="loadImage"/>
+            <TextBox x:Name="txt_path" Grid.Column="0" Margin="5" TextChanged="txt_path_TextChanged" VerticalAlignment="Center" />
+            <Button Content="Sfoglia..." Grid.Column="1" Click="loadImage" />
 
             <!--Scale-->
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Label Content="Scale:" Margin="5"/>
-                <Slider x:Name="sld_scale" Maximum="100" SmallChange="1" Margin="5" AutoToolTipPlacement="TopLeft" Value="25" TickPlacement="BottomRight" Grid.Column="1" TickFrequency="11" ValueChanged="sld_scale_ValueChanged"/>
+                <Label Content="Scale:" Margin="5" />
+                <Slider x:Name="sld_scale" Maximum="100" SmallChange="1" Margin="5" AutoToolTipPlacement="TopLeft" Value="25" TickPlacement="BottomRight" Grid.Column="1" TickFrequency="11" ValueChanged="sld_scale_ValueChanged" />
             </Grid>
 
             <!--Aspect-->
             <ComboBox x:Name="cmb_aspect" Grid.Column="4" Margin="8" SelectedIndex="0" SelectionChanged="cmb_aspect_SelectionChanged">
-                <ComboBoxItem Content="Stretch"/>
-                <ComboBoxItem Content="Keep Aspect"/>
+                <ComboBoxItem Content="Stretch" />
+                <ComboBoxItem Content="Keep Aspect" />
             </ComboBox>
         </Grid>
-        <Separator Grid.Row="2"/>
-        <Grid x:Name="grd_img" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Separator Grid.Row="4"/>
+        <Separator Grid.Row="2" />
+        <Grid x:Name="grd_img" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Separator Grid.Row="4" />
         <!--Toolbox and image-->
         <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.Resources>
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="Margin" Value="5"/>
-                    <Setter Property="Padding" Value="4"/>
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Padding" Value="4" />
                 </Style>
             </Grid.Resources>
-            <Button Content="Apri statistiche" Click="ApriStatistiche"/>
+            <Button Content="Apri statistiche" Click="ApriStatistiche" />
 
             <!--NeuralNetwork controls-->
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-                <RadioButton x:Name="rdbEpoch" Content="Epoche" GroupName="train" IsChecked="True"/>
-                <RadioButton Grid.Row="1" Content="Errore minimo"  GroupName="train"/>
+                <RadioButton x:Name="rdbEpoch" Content="Epoche" GroupName="train" IsChecked="True" />
+                <RadioButton Grid.Row="1" Content="Errore minimo"  GroupName="train" />
             </Grid>
-            <Button Content="Allena" Grid.Column="3" Click="startTraining"/>
-            <Button Content="Riconosci" Grid.Column="4" Click="startRecognition"/>
+            <Button Content="Allena" Grid.Column="3" Click="startTraining" />
+            <Button Content="Riconosci" Grid.Column="4" Click="startRecognition" />
         </Grid>
     </Grid>
 </Window>

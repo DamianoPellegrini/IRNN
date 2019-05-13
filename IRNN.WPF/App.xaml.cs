@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using IRNN;
+﻿using System.Windows;
 
-namespace IRNN.WPF
-{
+namespace IRNN.WPF {
+
     /// <summary>
     /// Logica di interazione per App.xaml
     /// </summary>
-    public partial class App : Application
-    {
+    public partial class App : Application {
         private MenuWindow _menuWnd;
         private NetworkWindow _netWnd;
         private StatsWindow _statsWnd;
@@ -42,28 +34,37 @@ namespace IRNN.WPF
         /// <summary>
         /// It commands the network.
         /// </summary>
-        public NetworkWindow NetworkWindow
-        {
-            get { return _netWnd; }
-            set { _netWnd = value; }
+        public NetworkWindow NetworkWindow {
+            get {
+                return _netWnd;
+            }
+            set {
+                _netWnd = value;
+            }
         }
 
         /// <summary>
         /// It shows the statistic of the network.
         /// </summary>
-        public StatsWindow StatisticsWindow
-        {
-            get { return _statsWnd; }
-            set { _statsWnd = value; }
+        public StatsWindow StatisticsWindow {
+            get {
+                return _statsWnd;
+            }
+            set {
+                _statsWnd = value;
+            }
         }
 
         /// <summary>
         /// It handles the .pbm creation.
         /// </summary>
-        public ImageCreator ImageCreatorWindow
-        {
-            get { return _imgWnd; }
-            set { _imgWnd = value; }
+        public ImageCreator ImageCreatorWindow {
+            get {
+                return _imgWnd;
+            }
+            set {
+                _imgWnd = value;
+            }
         }
 
         /// <summary>
@@ -78,8 +79,10 @@ namespace IRNN.WPF
             }
         }
 
-        public App() : base()
-        {
+        /// <summary>
+        /// Costruttore dell'app WPF, l'entrypoint
+        /// </summary>
+        public App() : base() {
             Loader.Load();
             _menuWnd = MainWindow as MenuWindow;
             _netWnd = new NetworkWindow();
@@ -89,6 +92,5 @@ namespace IRNN.WPF
 
             HasClosed = false;
         }
-
     }
 }

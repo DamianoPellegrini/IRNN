@@ -9,23 +9,22 @@
         Title="MainWindow" Height="450" Width="800" Closed="Window_Closed" Initialized="Window_Initialized" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <ListView x:Name="lst_recentImages" Margin="10">
-            
         </ListView>
         <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="Width" Value="200"/>
-                    <Setter Property="Height" Value="50"/>
-                    <Setter Property="FontSize" Value="20"/>
-                    <Setter Property="Margin" Value="2"/>
+                    <Setter Property="Width" Value="200" />
+                    <Setter Property="Height" Value="50" />
+                    <Setter Property="FontSize" Value="20" />
+                    <Setter Property="Margin" Value="2" />
                 </Style>
             </StackPanel.Resources>
-            <Button x:Name="btn_editor" Content="Image editor" Click="openWindow"/>
-            <Button x:Name="btn_network" Content="Neural network" Click="openWindow"/>
+            <Button x:Name="btn_editor" Content="Image editor" Click="openWindow" />
+            <Button x:Name="btn_network" Content="Neural network" Click="openWindow" />
         </StackPanel>
     </Grid>
 </Window>

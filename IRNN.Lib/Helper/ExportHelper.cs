@@ -1,156 +1,134 @@
-﻿using System.IO;
-using System.Windows.Forms;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
 
+namespace IRNN {
 
-namespace IRNN
-{
-	public static class ExportHelper
-	{
-		public static void ExportNetwork(Network network)
-		{
-			var dn = GetHelperNetwork(network);
+    public static class ExportHelper {
 
-			var dialog = new SaveFileDialog
-			{
-				Title = "Save Network File",
-				Filter = "Text File|*.txt;"
-			};
+        public static void ExportNetwork(Network network) {
+            var dn = GetHelperNetwork(network);
 
-			using (dialog)
-			{
-				if (dialog.ShowDialog() != DialogResult.OK) return;
-				using (var file = File.CreateText(dialog.FileName))
-				{
-					var serializer = new JsonSerializer { Formatting = Formatting.Indented };
-					serializer.Serialize(file, dn);
-				}
-			}
-		}
+            var dialog = new SaveFileDialog {
+                Title = "Save Network File",
+                Filter = "Text File|*.txt;"
+            };
 
-		public static void ExportDatasets(List<DataSet> datasets)
-		{
-			var dialog = new SaveFileDialog
-			{
-				Title = "Save Dataset File",
-				Filter = "Text File|*.txt;"
-			};
+            using (dialog) {
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return;
+                using (var file = File.CreateText(dialog.FileName)) {
+                    var serializer = new JsonSerializer { Formatting = Formatting.Indented };
+                    serializer.Serialize(file, dn);
+                }
+            }
+        }
 
-			using (dialog)
-			{
-				if (dialog.ShowDialog() != DialogResult.OK) return;
-				using (var file = File.CreateText(dialog.FileName))
-				{
-					var serializer = new JsonSerializer { Formatting = Formatting.Indented };
-					serializer.Serialize(file, datasets);
-				}
-			}
-		}
+        public static void ExportDatasets(List<DataSet> datasets) {
+            var dialog = new SaveFileDialog {
+                Title = "Save Dataset File",
+                Filter = "Text File|*.txt;"
+            };
 
-		private static HelperNetwork GetHelperNetwork(Network network)
-		{
-			var hn = new HelperNetwork
-			{
-				LearnRate = network.LearnRate,
-				Momentum = network.Momentum
-			};
+            using (dialog) {
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return;
+                using (var file = File.CreateText(dialog.FileName)) {
+                    var serializer = new JsonSerializer { Formatting = Formatting.Indented };
+                    serializer.Serialize(file, datasets);
+                }
+            }
+        }
 
-			//Input Layer
-			foreach (var n in network.InputLayer)
-			{
-				var neuron = new HelperNeuron
-				{
-					Id = n.Id,
-					Bias = n.Bias,
-					BiasDelta = n.BiasDelta,
-					Gradient = n.Gradient,
-					Value = n.Value
-				};
+        private static HelperNetwork GetHelperNetwork(Network network) {
+            var hn = new HelperNetwork {
+                LearnRate = network.LearnRate,
+                Momentum = network.Momentum
+            };
 
-				hn.InputLayer.Add(neuron);
+            //Input Layer
+            foreach (var n in network.InputLayer) {
+                var neuron = new HelperNeuron {
+                    Id = n.Id,
+                    Bias = n.Bias,
+                    BiasDelta = n.BiasDelta,
+                    Gradient = n.Gradient,
+                    Value = n.Value
+                };
 
-				foreach (var synapse in n.OutputSynapses)
-				{
-					var syn = new HelperSynapse
-					{
-						Id = synapse.Id,
-						OutputNeuronId = synapse.OutputNeuron.Id,
-						InputNeuronId = synapse.InputNeuron.Id,
-						Weight = synapse.Weight,
-						WeightDelta = synapse.WeightDelta
-					};
+                hn.InputLayer.Add(neuron);
 
-					hn.Synapses.Add(syn);
-				}
-			}
+                foreach (var synapse in n.OutputSynapses) {
+                    var syn = new HelperSynapse {
+                        Id = synapse.Id,
+                        OutputNeuronId = synapse.OutputNeuron.Id,
+                        InputNeuronId = synapse.InputNeuron.Id,
+                        Weight = synapse.Weight,
+                        WeightDelta = synapse.WeightDelta
+                    };
 
-			//Hidden Layer
-			foreach (var l in network.HiddenLayers)
-			{
-				var layer = new List<HelperNeuron>();
+                    hn.Synapses.Add(syn);
+                }
+            }
 
-				foreach (var n in l)
-				{
-					var neuron = new HelperNeuron
-					{
-						Id = n.Id,
-						Bias = n.Bias,
-						BiasDelta = n.BiasDelta,
-						Gradient = n.Gradient,
-						Value = n.Value
-					};
+            //Hidden Layer
+            foreach (var l in network.HiddenLayers) {
+                var layer = new List<HelperNeuron>();
 
-					layer.Add(neuron);
+                foreach (var n in l) {
+                    var neuron = new HelperNeuron {
+                        Id = n.Id,
+                        Bias = n.Bias,
+                        BiasDelta = n.BiasDelta,
+                        Gradient = n.Gradient,
+                        Value = n.Value
+                    };
 
-					foreach (var synapse in n.OutputSynapses)
-					{
-						var syn = new HelperSynapse
-						{
-							Id = synapse.Id,
-							OutputNeuronId = synapse.OutputNeuron.Id,
-							InputNeuronId = synapse.InputNeuron.Id,
-							Weight = synapse.Weight,
-							WeightDelta = synapse.WeightDelta
-						};
+                    layer.Add(neuron);
 
-						hn.Synapses.Add(syn);
-					}
-				}
+                    foreach (var synapse in n.OutputSynapses) {
+                        var syn = new HelperSynapse {
+                            Id = synapse.Id,
+                            OutputNeuronId = synapse.OutputNeuron.Id,
+                            InputNeuronId = synapse.InputNeuron.Id,
+                            Weight = synapse.Weight,
+                            WeightDelta = synapse.WeightDelta
+                        };
 
-				hn.HiddenLayers.Add(layer);
-			}
+                        hn.Synapses.Add(syn);
+                    }
+                }
 
-			//Output Layer
-			foreach (var n in network.OutputLayer)
-			{
-				var neuron = new HelperNeuron
-				{
-					Id = n.Id,
-					Bias = n.Bias,
-					BiasDelta = n.BiasDelta,
-					Gradient = n.Gradient,
-					Value = n.Value
-				};
+                hn.HiddenLayers.Add(layer);
+            }
 
-				hn.OutputLayer.Add(neuron);
+            //Output Layer
+            foreach (var n in network.OutputLayer) {
+                var neuron = new HelperNeuron {
+                    Id = n.Id,
+                    Bias = n.Bias,
+                    BiasDelta = n.BiasDelta,
+                    Gradient = n.Gradient,
+                    Value = n.Value
+                };
 
-				foreach (var synapse in n.OutputSynapses)
-				{
-					var syn = new HelperSynapse
-					{
-						Id = synapse.Id,
-						OutputNeuronId = synapse.OutputNeuron.Id,
-						InputNeuronId = synapse.InputNeuron.Id,
-						Weight = synapse.Weight,
-						WeightDelta = synapse.WeightDelta
-					};
+                hn.OutputLayer.Add(neuron);
 
-					hn.Synapses.Add(syn);
-				}
-			}
+                foreach (var synapse in n.OutputSynapses) {
+                    var syn = new HelperSynapse {
+                        Id = synapse.Id,
+                        OutputNeuronId = synapse.OutputNeuron.Id,
+                        InputNeuronId = synapse.InputNeuron.Id,
+                        Weight = synapse.Weight,
+                        WeightDelta = synapse.WeightDelta
+                    };
 
-			return hn;
-		}
-	}
+                    hn.Synapses.Add(syn);
+                }
+            }
+
+            return hn;
+        }
+    }
 }

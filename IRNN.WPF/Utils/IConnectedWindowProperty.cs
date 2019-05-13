@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
-namespace IRNN.WPF.Utils
-{
-    public struct WindowProperty
-    {
-        double Width;
-        double Height;
-        double Left;
-        double Top;
-        WindowState State;
+namespace IRNN.WPF.Utils {
+
+    /// <summary>
+    /// Struttura contente le proprietà basilari di una finestra
+    /// </summary>
+    public struct WindowProperty {
+#pragma warning disable CS0169 // Rimuovi i membri privati inutilizzati
+        private double Width;
+        private double Height;
+        private double Left;
+        private double Top;
+        private WindowState State;
+#pragma warning restore CS0169 // Rimuovi i membri privati inutilizzati
     }
-    interface IConnectedWindowProperty
-    {
+
+    internal interface IConnectedWindowProperty {
+
         void Show(WindowProperty prop);
+
         //void Hide(WindowProperty prop);
     }
 }

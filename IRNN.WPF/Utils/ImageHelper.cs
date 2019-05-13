@@ -1,22 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
+namespace IRNN.WPF.Utils {
 
-namespace IRNN.WPF.Utils
-{
-    internal class ImageHelper
-    {
+    internal class ImageHelper {
+
         //TODO: passare path e salvare immagine
-        internal static BitmapImage InkCanvasToBitmap(InkCanvas canvas)
-        {
+        internal static BitmapImage InkCanvasToBitmap(InkCanvas canvas) {
             //RENDERING
             int width = (int)canvas.ActualWidth;
             int height = (int)canvas.ActualHeight;
@@ -53,13 +46,11 @@ namespace IRNN.WPF.Utils
             return ret = new BitmapImage(new Uri("tmp.bmp", UriKind.Relative));
         }
 
-        internal static Color[,] BitmapToColorMatrix(TransformedBitmap image)
-        {
+        internal static Color[,] BitmapToColorMatrix(TransformedBitmap image) {
             throw new NotImplementedException();
         }
 
-        internal static PBMImage ColorMatrixToPBMImage(Color[,] image)
-        {
+        internal static PBMImage ColorMatrixToPBMImage(Color[,] image) {
             throw new NotImplementedException();
         }
     }

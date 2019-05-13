@@ -6,18 +6,15 @@
     <FontFamily x:Key="RobotoThin">pack://application;,,,/Fonts/#Roboto Thin</FontFamily>
 
     <Style TargetType="{x:Type Control}" x:Key="BaseStyle">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}"/>
+        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlockStyle">
-        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}"/>
+        <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
     </Style>
 
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}"/>
-    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BaseStyle}"/>
-    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}"/>
-    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}"/>
-
-
-
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}" />
+    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BaseStyle}" />
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}" />
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}" />
 </ResourceDictionary>

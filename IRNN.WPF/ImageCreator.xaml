@@ -8,57 +8,57 @@
         Title="ImageCreator" Height="450" Width="800" Closing="Window_Closing" Initialized="Window_Initialized" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="_File">
-                <MenuItem Header="_Salva immagine" Click="menu_salva"/>
-                <MenuItem Header="_Pulisci tela" Click="menu_pulisci"/>
-                <Separator/>
-                <MenuItem Header="_Esci" Click="menu_esci"/>
+                <MenuItem Header="_Salva immagine" Click="menu_salva" />
+                <MenuItem Header="_Pulisci tela" Click="menu_pulisci" />
+                <Separator />
+                <MenuItem Header="_Esci" Click="menu_esci" />
             </MenuItem>
-            <MenuItem Header="_Modifica"/>
-            <MenuItem Header="_?"/>
+            <MenuItem Header="_Modifica" />
+            <MenuItem Header="_?" />
         </Menu>
         <Border Grid.Row="1" Margin="20" BorderThickness="2" BorderBrush="#FF2A2A2A">
             <Grid x:Name="grd_inkWrapper">
             <InkCanvas x:Name="ink_drawingBoard">
                     <InkCanvas.DefaultDrawingAttributes>
-                        <DrawingAttributes Color="Black" FitToCurve="False" Height="2" IgnorePressure="False" IsHighlighter="False" StylusTip="Ellipse" StylusTipTransform="Identity" Width="2"/>
+                        <DrawingAttributes Color="Black" FitToCurve="False" Height="2" IgnorePressure="False" IsHighlighter="False" StylusTip="Ellipse" StylusTipTransform="Identity" Width="2" />
                     </InkCanvas.DefaultDrawingAttributes>
                 </InkCanvas>
             </Grid>
         </Border>
-        <Separator Grid.Row="2"/>
+        <Separator Grid.Row="2" />
         <Grid x:Name="grd_commands" Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.Resources>
                 <Style TargetType="Button">
-                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Margin" Value="5" />
                 </Style>
             </Grid.Resources>
-            <Button Content="Salva immagine" Click="menu_salva"/>
-            <Button Content="Pulisci tela" Grid.Column="1" Click="menu_pulisci"/>
+            <Button Content="Salva immagine" Click="menu_salva" />
+            <Button Content="Pulisci tela" Grid.Column="1" Click="menu_pulisci" />
             <ComboBox x:Name="chb_size" Grid.Column="3" Margin="5" SelectedIndex="0" SelectionChanged="switchSize" IsEnabled="False">
-                <ComboBoxItem Content="2"/>
-                <ComboBoxItem Content="4"/>
-                <ComboBoxItem Content="6"/>
-                <ComboBoxItem Content="8"/>
-                <ComboBoxItem Content="10"/>
-                <ComboBoxItem Content="12"/>
+                <ComboBoxItem Content="2" />
+                <ComboBoxItem Content="4" />
+                <ComboBoxItem Content="6" />
+                <ComboBoxItem Content="8" />
+                <ComboBoxItem Content="10" />
+                <ComboBoxItem Content="12" />
             </ComboBox>
             <ComboBox x:Name="chb_tool" Grid.Column="4" Margin="5" SelectedIndex="0" SelectionChanged="switchTool">
-                <ComboBoxItem Content="Penna"/>
-                <ComboBoxItem Content="Gomma"/>
+                <ComboBoxItem Content="Penna" />
+                <ComboBoxItem Content="Gomma" />
             </ComboBox>
         </Grid>
     </Grid>
