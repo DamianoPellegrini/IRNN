@@ -40,10 +40,18 @@ namespace IRNN.WPF {
         }
 
         private void caricaGrafico() {
+            spl_error.Points.Clear();
+            GC.Collect(); //Diminuisce il quantitativo di memoria utilizzata
             string path = Directory.GetCurrentDirectory() + "\\data.txt";
             List<double[]> DatStringError = LeggiFile(path);
             foreach (double[] line in DatStringError) {
+                //spl_error.Points.Add(new DoublePoint() { Data = DatStringError[0][0], Value = DatStringError[0][1] });
+                //var increment = DatStringError.Count / 1000;
+                //for (int i = 1; i < DatStringError.Count-1; i+=(increment >= 1 ? increment : 1)) {
+                //        double[] line = DatStringError[i];
                 spl_error.Points.Add(new DoublePoint() { Data = line[0], Value = line[1] });
+                //    }
+                //    spl_error.Points.Add(new DoublePoint() { Data = DatStringError[DatStringError.Count-1][0], Value = DatStringError[DatStringError.Count - 1][1] });
             }
         }
 
@@ -106,6 +114,10 @@ namespace IRNN.WPF {
 
         public void Show(WindowProperty prop) {
             throw new NotImplementedException();
+        }
+
+        private void Window_Activated(object sender, EventArgs e) {
+            caricaGrafico();
         }
     }
 }

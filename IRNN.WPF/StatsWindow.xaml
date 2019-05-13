@@ -6,7 +6,7 @@
         xmlns:spr="http://sparrowtoolkit.codeplex.com/wpf"
         xmlns:local="clr-namespace:IRNN.WPF"
         mc:Ignorable="d"
-        Title="StatsWindow" Height="450" Width="800" Closing="Window_Closing" Initialized="Window_Initialized" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="StatsWindow" Height="450" Width="800" Closing="Window_Closing" Initialized="Window_Initialized" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Activated="Window_Activated">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
@@ -37,12 +37,12 @@
                         <spr:DoublePoint Data="1000" Value="0" />
                     </spr:SplineSeries.Points>
                 </spr:SplineSeries>
-                <spr:LineSeries x:Name="spl_error" Stroke="Green" StrokeThickness="2">
+                <spr:SplineSeries x:Name="spl_error" Stroke="Green" StrokeThickness="2">
                     <!--<spr:SplineSeries.Points>
                         <spr:DoublePoint Data="10" Value="0" />
                         <spr:DoublePoint Data="450" Value="2" />
                     </spr:SplineSeries.Points>-->
-                </spr:LineSeries>
+                </spr:SplineSeries>
             </spr:SparrowChart.Series>
         </spr:SparrowChart>
         <Grid Grid.Row="1" Grid.Column="1">
