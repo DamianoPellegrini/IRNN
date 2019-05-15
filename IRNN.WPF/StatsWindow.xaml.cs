@@ -13,7 +13,7 @@ namespace IRNN.WPF {
     /// </summary>
     public partial class StatsWindow : Window, IConnectedWindowProperty {
         private App _main;
-
+        //TODO: BUG?: le epoche max non sono giuste se il file data.txt è stato creato con errore minimo perhce potrebbero essere di più o di meno
         private Network _network;
         private int NumEpoche = 100;
         private WindowProperty _prop;
@@ -36,7 +36,7 @@ namespace IRNN.WPF {
             _network = _main.Network;
             caricaGrafico();
             //TODO sistema
-            //caricaLista(lst_layers, _network.NeuralLayers);
+            caricaLista(lst_layers, _network.GetAllLayers());
         }
 
         private void caricaGrafico() {
@@ -44,15 +44,16 @@ namespace IRNN.WPF {
             GC.Collect(); //Diminuisce il quantitativo di memoria utilizzata
             string path = Directory.GetCurrentDirectory() + "\\data.txt";
             List<double[]> DatStringError = LeggiFile(path);
-            foreach (double[] line in DatStringError) {
-                //spl_error.Points.Add(new DoublePoint() { Data = DatStringError[0][0], Value = DatStringError[0][1] });
-                //var increment = DatStringError.Count / 1000;
-                //for (int i = 1; i < DatStringError.Count-1; i+=(increment >= 1 ? increment : 1)) {
-                //        double[] line = DatStringError[i];
+            epochAxis.MaxValue = DatStringError.Count;
+            //foreach (double[] line in DatStringError) {
+            //TODO: Reimplementa il coso con incrementi ogni 10
+            spl_error.Points.Add(new DoublePoint() { Data = DatStringError[0][0], Value = DatStringError[0][1] });
+            for (int i = 1; i < DatStringError.Count - 1; i += 10) {
+                double[] line = DatStringError[i];
                 spl_error.Points.Add(new DoublePoint() { Data = line[0], Value = line[1] });
-                //    }
-                //    spl_error.Points.Add(new DoublePoint() { Data = DatStringError[DatStringError.Count-1][0], Value = DatStringError[DatStringError.Count - 1][1] });
             }
+            spl_error.Points.Add(new DoublePoint() { Data = DatStringError[DatStringError.Count - 1][0], Value = DatStringError[DatStringError.Count - 1][1] });
+            //}
         }
 
         private List<double[]> LeggiFile(string path) {
@@ -94,11 +95,13 @@ namespace IRNN.WPF {
             if (lst_layers.SelectedIndex == -1)
                 return;
             //TODO sistema
-            //if (_network.NeuralLayers[lst_layers.SelectedIndex] == null) return;
-            //if (_network.NeuralLayers[lst_layers.SelectedIndex].Neurons[lst_neurons.SelectedIndex] == null)
-            //    return;
+            //TODO: DOPO AVER SISTEMATO: non stampa nelle listbox il nome/numero del layer, mettere il tostring del neurone, e mettee le label su cui stampare i dati del neurone
+            var layers = _network.GetAllLayers();
+            if (layers[lst_layers.SelectedIndex] == null) return;
+            if (layers[lst_layers.SelectedIndex][lst_neurons.SelectedIndex] == null)
+                return;
 
-            //var neuron = _network.NeuralLayers[lst_layers.SelectedIndex].Neurons[lst_neurons.SelectedIndex];
+            var neuron = layers[lst_layers.SelectedIndex][lst_neurons.SelectedIndex];
             //TODO gestire la stampa del neurone con il toString
         }
 
@@ -106,10 +109,11 @@ namespace IRNN.WPF {
             if (lst_layers.SelectedIndex == -1)
                 return;
             //TODO sistema
-            //if (_network.NeuralLayers[lst_layers.SelectedIndex] == null) return;
+            var layers = _network.GetAllLayers();
+            if (layers[lst_layers.SelectedIndex] == null) return;
 
-            //var layer = _network.NeuralLayers[lst_layers.SelectedIndex];
-            //caricaLista(lst_neurons, layer.Neurons);
+            var layer = layers[lst_layers.SelectedIndex];
+            caricaLista(lst_neurons, layer);
         }
 
         public void Show(WindowProperty prop) {

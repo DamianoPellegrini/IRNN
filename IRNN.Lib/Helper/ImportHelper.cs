@@ -89,7 +89,7 @@ namespace IRNN {
                 var dialog = new OpenFileDialog {
                     Multiselect = false,
                     Title = "Open Dataset File",
-                    Filter = "Text File|*.txt;"
+                    Filter = "JSON File(*.json)|*.json;"
                 };
 
                 using (dialog) {
@@ -109,7 +109,7 @@ namespace IRNN {
                 var dialog = new OpenFileDialog {
                     Multiselect = false,
                     Title = "Open Network File",
-                    Filter = "Text File|*.txt;"
+                    Filter = "JSON File(*.json)|*.json;"
                 };
 
                 using (dialog) {

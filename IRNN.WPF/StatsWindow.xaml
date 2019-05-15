@@ -28,7 +28,7 @@
                 <spr:LinearYAxis Header="Global error, ETA" MinValue="0" MaxValue="2" Interval="0,2" />
             </spr:SparrowChart.YAxis>
             <spr:SparrowChart.XAxis>
-                <spr:LinearXAxis x:Name="epochAxis" Header="Epoch" MinValue="0" MaxValue="450" Interval="25" />
+                <spr:LinearXAxis x:Name="epochAxis" Header="Epoch" MinValue="0" MaxValue="1" Interval="25" />
             </spr:SparrowChart.XAxis>
             <spr:SparrowChart.Series>
                 <spr:SplineSeries x:Name="spl_general" Stroke="Black" StrokeThickness="2">

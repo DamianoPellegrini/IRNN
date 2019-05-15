@@ -12,7 +12,7 @@ namespace IRNN {
 
             var dialog = new SaveFileDialog {
                 Title = "Save Network File",
-                Filter = "Text File|*.txt;"
+                Filter = "JSON File(*.json)|*.json;"
             };
 
             using (dialog) {
@@ -28,7 +28,7 @@ namespace IRNN {
         public static void ExportDatasets(List<DataSet> datasets) {
             var dialog = new SaveFileDialog {
                 Title = "Save Dataset File",
-                Filter = "Text File|*.txt;"
+                Filter = "JSON File(*.json)|*.json;"
             };
 
             using (dialog) {

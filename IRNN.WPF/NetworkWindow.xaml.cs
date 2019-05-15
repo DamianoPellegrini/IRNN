@@ -16,7 +16,8 @@ namespace IRNN.WPF {
         private List<DataSet> dataSets;
         private List<string> classes;
         private bool isTrainingFinished;
-
+        private string TrainFolderPath = Directory.GetCurrentDirectory() + "\\Trainset";
+        //TODO: BUG: nel file trainset viene salvata una combinazione in binaria non in relazione con il numero di strati finali
         private App _main;
         private Network _network;
 
@@ -25,7 +26,7 @@ namespace IRNN.WPF {
         }
 
         private void CreateDataSet() {
-            StreamReader sr = new StreamReader(Directory.GetCurrentDirectory() + "\\Images\\trainingset.cfg");
+            StreamReader sr = new StreamReader(TrainFolderPath + "\\trainingset.cfg");
             classes = new List<string>();
             PBMImage image;
             while (sr.Peek() > 0) {
@@ -39,7 +40,7 @@ namespace IRNN.WPF {
                 for (int j = 0; j < output.Length; j++) {
                     output[j] = Convert.ToDouble(arrTemp[1].Split('.')[j]);
                 }
-                image = new PBMImage(Directory.GetCurrentDirectory() + "\\Images\\" + arrTemp[0]);
+                image = new PBMImage(TrainFolderPath + "\\" + arrTemp[0]);
                 dataSets.Add(new DataSet(image.ConvertMatToArray(), output));
             }
         }
@@ -53,9 +54,11 @@ namespace IRNN.WPF {
         }
 
         private void loadNetwork(object sender, RoutedEventArgs e) {
+            isTrainingFinished = true;
             _network = ImportHelper.ImportNetwork();
             if (_network == null) {
                 MessageBox.Show("No network has been loaded, retry");
+                isTrainingFinished = false;
             }
         }
 
@@ -84,6 +87,10 @@ namespace IRNN.WPF {
         }
 
         private void ApriStatistiche(object sender, RoutedEventArgs e) {
+            if (!isTrainingFinished) {
+                MessageBox.Show("Devi avere una rete allenata per vedere le sue statistiche");
+                return;
+            }
             this.Hide();
             _main.StatisticsWindow.Show();
         }
@@ -127,38 +134,47 @@ namespace IRNN.WPF {
         #endregion ImageHandlerMethods
 
         private void startRecognition(object sender, RoutedEventArgs e) {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.DefaultExt = "*.pbm";
-            fileDialog.Filter = "Immagine pbm|*.pbm";
+            //OpenFileDialog fileDialog = new OpenFileDialog();
+            //fileDialog.DefaultExt = "*.pbm";
+            //fileDialog.Filter = "Immagine pbm|*.pbm";
 
-            if ((bool)fileDialog.ShowDialog()) {
-                var input = new PBMImage(fileDialog.FileName);
-                var results = _network.Compute(input.ConvertMatToArray());
+            //if ((bool)fileDialog.ShowDialog()) {
+            if (!isTrainingFinished) {
+                MessageBox.Show("Devi prima fare un training!");
+                return;
+            }
+            if (txt_path.Text == string.Empty || txt_path == null) {
+                MessageBox.Show("Non è stato aperta un'immagine!");
+                return;
+            }
 
-                var result = results.Max();
 
-                if (result >= 0.9) {
-                    var possibleClass = classes[Array.IndexOf(results, result)];
-                    MessageBox.Show("The image sent looks like " + possibleClass.Split('|')[0] + "with a value of " + result + ".", "Testing done", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                if (result <= 0.9 && result >= 0.5) {
-                    var possibleClass = classes[Array.IndexOf(results, result)];
-                    MessageBox.Show("The image sent could be " + possibleClass.Split('|')[0] + ". The neural network gave an output value of " + result + ".", "Testing done", MessageBoxButton.OK, MessageBoxImage.Information);
-                } else if (result < 0.5) {
-                    MessageBox.Show("The image sent doesn't look like anything the neural network has ever seen before. Output value: " + result + ".", "Testing done", MessageBoxButton.OK, MessageBoxImage.Information);
-                    var AddNewClass = MessageBox.Show("Would you like to add this class to the training set? Keep in mind that you'll have to redo the training.", "Add class", MessageBoxButton.YesNo, MessageBoxImage.Information);
-                    if (AddNewClass == MessageBoxResult.Yes) {
-                        var className = Path.GetFileName(fileDialog.FileName) + "|" + (Convert.ToString((classes.Count + 1), 2));
-                        StreamWriter sw = File.AppendText(Directory.GetCurrentDirectory() + "\\Images\\trainingset.cfg");
-                        sw.Write(className);
-                        sw.Close();
+            var input = new PBMImage(txt_path.Text);
+            var results = _network.Compute(input.ConvertMatToArray());
 
-                        if (!File.Exists(Directory.GetCurrentDirectory() + "\\Images\\" + Path.GetFileName(fileDialog.FileName) + ".cfg")) {
-                            File.Copy(fileDialog.FileName, Directory.GetCurrentDirectory() + "\\Images");
-                            MessageBox.Show("Image copied!", "Done", MessageBoxButton.OK, MessageBoxImage.Information);
-                        } else {
-                            MessageBox.Show("There's already an image with the same name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
+            var result = results.Max();
+
+            if (result >= 0.9) {
+                var possibleClass = classes[Array.IndexOf(results, result)];
+                MessageBox.Show("The image sent looks like " + possibleClass.Split('|')[0] + " with a value of " + result + ".", "Testing done", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            if (result <= 0.9 && result >= 0.5) {
+                var possibleClass = classes[Array.IndexOf(results, result)];
+                MessageBox.Show("The image sent could be " + possibleClass.Split('|')[0] + ". The neural network gave an output value of " + result + ".", "Testing done", MessageBoxButton.OK, MessageBoxImage.Information);
+            } else if (result < 0.5) {
+                MessageBox.Show("The image sent doesn't look like anything the neural network has ever seen before. Output value: " + result + ".", "Testing done", MessageBoxButton.OK, MessageBoxImage.Information);
+                var AddNewClass = MessageBox.Show("Would you like to add this class to the training set? Keep in mind that you'll have to redo the training.", "Add class", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                if (AddNewClass == MessageBoxResult.Yes) {
+                    var className = Path.GetFileName(txt_path.Text) + "|" + (Convert.ToString((classes.Count + 1), 2));
+                    StreamWriter sw = File.AppendText(TrainFolderPath + "\\trainingset.cfg");
+                    sw.Write(className);
+                    sw.Close();
+
+                    if (!File.Exists(TrainFolderPath + "\\" + Path.GetFileName(txt_path.Text) + ".cfg")) {
+                        File.Copy(txt_path.Text, TrainFolderPath);
+                        MessageBox.Show("Image copied!", "Done", MessageBoxButton.OK, MessageBoxImage.Information);
+                    } else {
+                        MessageBox.Show("There's already an image with the same name.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
