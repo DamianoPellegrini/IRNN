@@ -106,8 +106,7 @@ namespace IRNN.WPF {
             if (openfile.ShowDialog() == true) {
                 string filePath = openfile.FileName;
                 txt_path.Text = filePath;
-                //Non serve perchè viene chiamata nel metodo textchanged
-                //applyImage(filePath);
+                applyImage(filePath);
             }
         }
 
