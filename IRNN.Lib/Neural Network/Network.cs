@@ -156,10 +156,10 @@ namespace IRNN {
         public List<List<Neuron>> GetAllLayers() {
             List<List<Neuron>> ret = new List<List<Neuron>>();
             ret.Add(InputLayer);//Input
-            ret.Add(OutputLayer);//Output
             foreach (var item in HiddenLayers) {
                 ret.Add(item);
             }
+            ret.Add(OutputLayer);//Output
             return ret;
         }
 

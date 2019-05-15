@@ -13,7 +13,6 @@ namespace IRNN.WPF {
     /// </summary>
     public partial class StatsWindow : Window, IConnectedWindowProperty {
         private App _main;
-        //TODO: BUG?: le epoche max non sono giuste se il file data.txt è stato creato con errore minimo perhce potrebbero essere di più o di meno
         private Network _network;
         private int NumEpoche = 100;
         private WindowProperty _prop;
@@ -35,8 +34,14 @@ namespace IRNN.WPF {
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             _network = _main.Network;
             caricaGrafico();
-            //TODO sistema
-            caricaLista(lst_layers, _network.GetAllLayers());
+            List<ListViewItem> itemlist = new List<ListViewItem>();
+            var layers = _network.GetAllLayers();
+            itemlist.Add(new ListViewItem() { Content = "Input Layer" });
+            for (int i = 1; i < layers.Count - 1; i++) {
+                itemlist.Add(new ListViewItem() { Content = "Hidden Layer " + i });
+            }
+            itemlist.Add(new ListViewItem() { Content = "Output Layer" });
+            caricaLista(lst_layers, itemlist);
         }
 
         private void caricaGrafico() {
@@ -46,7 +51,6 @@ namespace IRNN.WPF {
             List<double[]> DatStringError = LeggiFile(path);
             epochAxis.MaxValue = DatStringError.Count;
             //foreach (double[] line in DatStringError) {
-            //TODO: Reimplementa il coso con incrementi ogni 10
             spl_error.Points.Add(new DoublePoint() { Data = DatStringError[0][0], Value = DatStringError[0][1] });
             for (int i = 1; i < DatStringError.Count - 1; i += 10) {
                 double[] line = DatStringError[i];
@@ -94,23 +98,29 @@ namespace IRNN.WPF {
                 return;
             if (lst_layers.SelectedIndex == -1)
                 return;
-            //TODO sistema
-            //TODO: DOPO AVER SISTEMATO: non stampa nelle listbox il nome/numero del layer, mettere il tostring del neurone, e mettee le label su cui stampare i dati del neurone
+
             var layers = _network.GetAllLayers();
-            if (layers[lst_layers.SelectedIndex] == null) return;
+            if (layers[lst_layers.SelectedIndex] == null)
+                return;
             if (layers[lst_layers.SelectedIndex][lst_neurons.SelectedIndex] == null)
                 return;
 
             var neuron = layers[lst_layers.SelectedIndex][lst_neurons.SelectedIndex];
-            //TODO gestire la stampa del neurone con il toString
+            var labels = grd_neuronInfo.Children;
+            (labels[0] as Label).Content = $"ID: {neuron.Id}";
+            (labels[1] as Label).Content = $"Bias: {neuron.Bias}";
+            (labels[2] as Label).Content = $"Bias Delta: {neuron.BiasDelta}";
+            (labels[3] as Label).Content = $"Gradient: {neuron.Gradient}";
+            (labels[4] as Label).Content = $"Value: {neuron.Value}";
         }
 
         private void lst_layers_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             if (lst_layers.SelectedIndex == -1)
                 return;
-            //TODO sistema
+
             var layers = _network.GetAllLayers();
-            if (layers[lst_layers.SelectedIndex] == null) return;
+            if (layers[lst_layers.SelectedIndex] == null)
+                return;
 
             var layer = layers[lst_layers.SelectedIndex];
             caricaLista(lst_neurons, layer);

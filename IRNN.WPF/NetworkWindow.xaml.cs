@@ -17,7 +17,6 @@ namespace IRNN.WPF {
         private List<string> classes;
         private bool isTrainingFinished;
         private string TrainFolderPath = Directory.GetCurrentDirectory() + "\\Trainset";
-        //TODO: BUG: nel file trainset viene salvata una combinazione in binaria non in relazione con il numero di strati finali
         private App _main;
         private Network _network;
 
@@ -55,11 +54,14 @@ namespace IRNN.WPF {
 
         private void loadNetwork(object sender, RoutedEventArgs e) {
             isTrainingFinished = true;
-            _network = ImportHelper.ImportNetwork();
-            if (_network == null) {
+            var tmpNet = ImportHelper.ImportNetwork();
+            if (tmpNet == null) {
                 MessageBox.Show("No network has been loaded, retry");
                 isTrainingFinished = false;
+                return;
             }
+            isTrainingFinished = true;
+            _network = tmpNet;
         }
 
         private void Window_Initialized(object sender, EventArgs e) {
@@ -147,7 +149,6 @@ namespace IRNN.WPF {
                 MessageBox.Show("Non è stato aperta un'immagine!");
                 return;
             }
-
 
             var input = new PBMImage(txt_path.Text);
             var results = _network.Compute(input.ConvertMatToArray());

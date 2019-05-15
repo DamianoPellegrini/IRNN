@@ -25,7 +25,7 @@
                 <spr:Legend />
             </spr:SparrowChart.Legend>
             <spr:SparrowChart.YAxis>
-                <spr:LinearYAxis Header="Global error, ETA" MinValue="0" MaxValue="2" Interval="0,2" />
+                <spr:LinearYAxis Header="Global error, ETA" MinValue="0" MaxValue="10" Interval="0,5" />
             </spr:SparrowChart.YAxis>
             <spr:SparrowChart.XAxis>
                 <spr:LinearXAxis x:Name="epochAxis" Header="Epoch" MinValue="0" MaxValue="1" Interval="25" />
@@ -45,8 +45,23 @@
                 </spr:SplineSeries>
             </spr:SparrowChart.Series>
         </spr:SparrowChart>
-        <Grid Grid.Row="1" Grid.Column="1">
-            <Label Content="Neuron weight etc..." />
-        </Grid>
+        <GroupBox Margin="5"  Grid.Row="1" Grid.Column="1" Header="Neuron info">
+            <Grid x:Name="grd_neuronInfo">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="ID: " />
+                <Label Content="Bias: " Grid.Row="1" />
+                <Label Content="Bias Delta: " Grid.Row="2" />
+                <Label Content="Gradient: " Grid.Row="1" Grid.Column="1" />
+                <Label Content="Value: " Grid.Row="2" Grid.Column="1" />
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

@@ -33,8 +33,11 @@ namespace IRNN.WPF.Utils {
             //ret.EndInit();
             fs.Close();
             //BitmapImage bmp = new BitmapImage(new Uri("tmp.bmp",UriKind.Relative));
-            //TODO: non va un bidone di nulla bisoagna ridimensionare l'immagine
-            //TODO: EDIT: lascio che salva solo il bmp almeno è meglio di nulla
+
+            /* non va un bidone di nulla bisoagna ridimensionare l'immagine
+             * EDIT: lascio che salva solo il bmp almeno è meglio di nulla
+            */
+
             //ret = new TransformedBitmap(bmp, new ScaleTransform(130/ width, 130 / height));
             //ret.BeginInit();
             //fs.Position = 0;
