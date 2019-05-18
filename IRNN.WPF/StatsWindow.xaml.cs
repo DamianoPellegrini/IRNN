@@ -2,6 +2,7 @@
 using Sparrow.Chart;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -50,13 +51,18 @@ namespace IRNN.WPF {
             string path = Directory.GetCurrentDirectory() + "\\data.txt";
             List<double[]> DatStringError = LeggiFile(path);
             epochAxis.MaxValue = DatStringError.Count;
+            errorAxis.MaxValue = Math.Ceiling(DatStringError[0][1]);
             //foreach (double[] line in DatStringError) {
             spl_error.Points.Add(new DoublePoint() { Data = DatStringError[0][0], Value = DatStringError[0][1] });
-            for (int i = 1; i < DatStringError.Count - 1; i += 10) {
+            //int increment = (int)((Math.Sqrt(DatStringError.Count-1)) + 1);//MODO 1
+            int increment = (int)((Math.Log(DatStringError.Count)*3) + 1);//MODO 2
+            for (int i = 1; i < DatStringError.Count - 1; i += increment) {
                 double[] line = DatStringError[i];
                 spl_error.Points.Add(new DoublePoint() { Data = line[0], Value = line[1] });
+                Debug.WriteLine($"{increment}|{i}|{line[0]}|{line[1]}");
             }
             spl_error.Points.Add(new DoublePoint() { Data = DatStringError[DatStringError.Count - 1][0], Value = DatStringError[DatStringError.Count - 1][1] });
+            Debug.WriteLine($"{increment}|FINE");
             //}
         }
 
