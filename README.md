@@ -19,6 +19,9 @@ N/A
 #### Alessandro Sciarrillo
 List of features:
 - Artificial Neural Network
+- Classes for I/O of the NN
+- Testing and parameter adjustment
+- Engine optimization
 #### Antonio Di Meglio
 List of features:
 - Artificial Neural Network
